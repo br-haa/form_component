@@ -1,6 +1,6 @@
 import * as components from "./components";
 
-const ComponentLibrary = {
+const HaaFormComponents = {
   // eslint-disable-next-line no-unused-vars
   install(Vue, options = {}) {
     // components
@@ -12,8 +12,8 @@ const ComponentLibrary = {
   }
 };
 
-export default ComponentLibrary;
+export default HaaFormComponents;
 
 if (typeof window !== "undefined" && window.Vue) {
-  window.Vue.use(ComponentLibrary);
+  window.Vue.use(HaaFormComponents);
 }
