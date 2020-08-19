@@ -13,5 +13,5 @@ export { default as TextArea } from "./text_area";
 export { default as TextField } from "./text_field";
 export { default as ThankYou } from "./thank_you";
 export { default as Zip } from "./zip_field";
-export {default as FormBase } from "./form_base";
-export {default as FormController} from "./0_form_controller"
+export { default as FormBase } from "./form_base";
+export { default as FormController } from "./0_form_controller";

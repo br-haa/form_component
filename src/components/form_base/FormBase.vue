@@ -20,7 +20,10 @@
                 <h2>{{ CtaText }}</h2>
               </div>
               <form id="contact-form">
-                <div :class="{ 'inline': inline === true, 'form1': inline === false }" v-if="FormType === 1">
+                <div
+                  :class="{ inline: inline === true, form1: inline === false }"
+                  v-if="FormType === 1"
+                >
                   <text-field
                     @validating="trackValidation"
                     :text-text="`First Name`"
@@ -246,8 +249,11 @@ export default {
     consent: {
       type: Boolean
     },
-    inline:{
+    inline: {
       type: Boolean
+    },
+    ZapPost: {
+      type: String
     }
   },
   computed: {
@@ -330,6 +336,9 @@ export default {
         }
       });
       this.PostType1();
+      if (this.ZapPost) {
+        this.sendZapPost();
+      }
     },
 
     HandleErrorMessage() {
@@ -352,7 +361,6 @@ export default {
 
     PostType1() {
       // sending off the data
-
       // eslint-disable-next-line no-undef
       __ctm.form.track(
         "app.calltrackingmetrics.com",
@@ -361,6 +369,21 @@ export default {
         this.CtmObject
       );
       this.ThankYouPageActivate();
+    },
+    sendZapPost: function() {
+      let custom = {};
+      this.AllData.forEach(vo => {
+        // adding all the post values and custom values to the custom object
+        custom[vo.id] = vo.value;
+      });
+      console.log(custom);
+      let xhr = new XMLHttpRequest(),
+        method = "POST",
+        url = this.ZapPost; // live
+      xhr.open(method, url, true);
+      // Set content type header information for sending url encoded variables in the request
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(JSON.stringify(custom));
     },
 
     search: function(id) {

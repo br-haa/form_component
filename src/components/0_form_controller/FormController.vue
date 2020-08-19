@@ -13,6 +13,7 @@
     :post-values="PostValues"
     :consent="consent"
     :inline="inline"
+    :zap-post="ZapPost"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -64,6 +65,9 @@ export default {
     inline: {
       type: Boolean,
       default: false
+    },
+    ZapPost: {
+      type: String
     }
   },
   data() {

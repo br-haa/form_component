@@ -12,7 +12,7 @@
 
 <script>
 import TextAreaBase from "../text_area_base/TextAreaBase.vue";
-export default{
+export default {
   components: { TextAreaBase },
   name: "TextArea",
   props: {

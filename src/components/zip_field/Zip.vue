@@ -11,7 +11,7 @@
 
 <script>
 import BaseField from "../base_field/BaseField.vue";
-export default{
+export default {
   components: { BaseField },
   name: "Zip",
 
