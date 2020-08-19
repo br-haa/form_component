@@ -1,6 +1,6 @@
 {
   "name": "haa-form",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "main": "dist/haa-form.umd.min.js",
   "scripts": {
@@ -49,8 +49,8 @@
         "files": [
           "**/__tests__/*.{j,t}s?(x)",
           "**/tests/unit/**/*.spec.{j,t}s?(x)",
-            "dist/*",
-            "src/*"
+          "dist/*",
+          "src/*"
         ],
         "env": {
           "mocha": true
