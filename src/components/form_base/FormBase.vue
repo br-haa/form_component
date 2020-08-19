@@ -20,7 +20,7 @@
                 <h2>{{ CtaText }}</h2>
               </div>
               <form id="contact-form">
-                <div class="form1" v-if="FormType === 1">
+                <div :class="{ 'inline': inline === true, 'form1': inline === false }" v-if="FormType === 1">
                   <text-field
                     @validating="trackValidation"
                     :text-text="`First Name`"
@@ -156,7 +156,7 @@
                 ></text-area>
                 <check-box-holder
                   @validating="trackValidation"
-                  v-if="Consent"
+                  v-if="consent"
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">
@@ -243,7 +243,10 @@ export default {
     PostValues: {
       type: Array
     },
-    Consent: {
+    consent: {
+      type: Boolean
+    },
+    inline:{
       type: Boolean
     }
   },
@@ -414,6 +417,24 @@ export default {
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: 1fr 1fr;
+    @media (max-width: 1080px) {
+      grid-template-columns: 1fr;
+      grid-column: span 1;
+    }
+  }
+}
+.inline {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.5rem;
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr;
+  }
+  .addedFieldsGrid {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: 1fr;
     @media (max-width: 1080px) {
       grid-template-columns: 1fr;
       grid-column: span 1;
