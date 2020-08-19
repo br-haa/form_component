@@ -11,6 +11,7 @@
     :button-text="PropButtonText"
     :client-link="PropClientLink"
     :post-values="PostValues"
+    :consent="Consent"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -54,6 +55,10 @@ export default {
     },
     PostValues: {
       type: Array
+    },
+    Consent: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

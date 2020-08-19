@@ -156,7 +156,7 @@
                 ></text-area>
                 <check-box-holder
                   @validating="trackValidation"
-                  v-if="FormType === 1 || FormType === 3"
+                  v-if="Consent"
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">
@@ -242,6 +242,9 @@ export default {
     },
     PostValues: {
       type: Array
+    },
+    Consent: {
+      type: Boolean
     }
   },
   computed: {
