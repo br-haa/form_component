@@ -319,9 +319,8 @@ export default {
       if (this.PostValues) {
         this.AllData = this.validationObjects.concat(this.PostValues);
       } else {
-        this.AllData = this.validationObjects.concat(
-          this.$store.state.Values.PostValues
-        );
+        const StoreValues = this.$store.state.Values.PostValues;
+        this.AllData = [...this.validationObjects, ...StoreValues];
       }
       this.setTimeStamp(); // updates time stamp
       console.log("Posting this data"); // console logging the visible form data
