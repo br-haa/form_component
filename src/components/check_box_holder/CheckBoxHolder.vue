@@ -18,8 +18,8 @@ export default {
     ConsentText: {
       type: String,
       default:
-        "I understand and agree that submitting this form does not create an attorney client relationship and the information I submit is not confidential or privileged"
-    }
+        "I understand and agree that submitting this form does not create an attorney client relationship and the information I submit is not confidential or privileged",
+    },
   },
 
   methods: {
@@ -29,11 +29,11 @@ export default {
       } else {
         this.$emit("validating", "Consent", "Consent", "false", false);
       }
-    }
+    },
   },
   mounted() {
     this.validateInput();
-  }
+  },
 };
 </script>
 

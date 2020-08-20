@@ -16,30 +16,30 @@ export default {
   name: "TextField",
   props: {
     TextText: {
-      type: String
+      type: String,
     },
     TextId: {
-      type: String
+      type: String,
     },
     TextName: {
-      type: String
+      type: String,
     },
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   computed: {
-    getDefaultName: function() {
+    getDefaultName: function () {
       if (this.TextName === undefined) {
         return this.TextText;
       } else {
         return this.TextName;
       }
-    }
+    },
   },
   data() {
     return {
-      pls: ``
+      pls: ``,
     };
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
         this.validateInput(input);
       }
     },
-    validateInput: function(input) {
+    validateInput: function (input) {
       if (input !== undefined && input !== "") {
         // making sure its not undefined or an empty string
         this.$emit("validating", this.getDefaultName, this.TextId, input, true);
@@ -70,11 +70,11 @@ export default {
           false
         );
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

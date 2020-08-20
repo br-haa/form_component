@@ -35,27 +35,27 @@ export default {
       userInput: "",
       info: {
         name: this.BaseName,
-        filled: false
-      }
+        filled: false,
+      },
     };
   },
   props: {
     Options: {
-      type: Array
+      type: Array,
     },
     BaseId: {
-      type: String
+      type: String,
     },
     BaseName: {
-      type: String
+      type: String,
     },
     NotRequired: {
-      type: Boolean
+      type: Boolean,
     },
     BaseText: {
       type: String,
-      default: "Pick An Option"
-    }
+      default: "Pick An Option",
+    },
   },
   methods: {
     SetPlaceholder() {
@@ -70,8 +70,8 @@ export default {
     },
     SendUp() {
       this.$emit("input", this.userInput);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -18,13 +18,13 @@ export default {
   data() {
     return {
       Value: "",
-      test: ""
+      test: "",
     };
   },
   props: {
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
     setRequired(input) {
@@ -40,17 +40,17 @@ export default {
         this.validateInput(input);
       }
     },
-    validateInput: function(input) {
+    validateInput: function (input) {
       if (input !== undefined && input !== "") {
         this.$emit("validating", "Date", "Date", input, true);
       } else {
         this.$emit("validating", "Date", "Date", input, false);
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

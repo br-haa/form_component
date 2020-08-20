@@ -18,38 +18,38 @@ export default {
   props: {
     TextText: {
       type: String,
-      default: "Message"
+      default: "Message",
     },
     TextId: {
       type: String,
-      default: "Message"
+      default: "Message",
     },
     TextName: {
       type: String,
-      default: "Message"
+      default: "Message",
     },
     NotRequired: {
-      type: Boolean
+      type: Boolean,
     },
     FormType: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   computed: {
-    getDefaultName: function() {
+    getDefaultName: function () {
       if (this.TextName === undefined) {
         return this.TextText;
       } else {
         return this.TextName;
       }
     },
-    getSpanSize: function() {
+    getSpanSize: function () {
       if (this.FormType === 1) {
         return 2;
       } else {
         return 3;
       }
-    }
+    },
   },
   data() {
     return {};
@@ -68,7 +68,7 @@ export default {
         this.validateInput(input);
       }
     },
-    validateInput: function(input) {
+    validateInput: function (input) {
       if (input !== undefined && input !== "") {
         this.$emit("validating", this.getDefaultName, this.TextId, input, true);
       } else {
@@ -80,11 +80,11 @@ export default {
           false
         );
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

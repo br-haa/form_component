@@ -16,8 +16,8 @@ export default {
   name: "PhoneNumber",
   props: {
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
     setRequired(input) {
@@ -41,11 +41,11 @@ export default {
       } else {
         this.$emit("validating", "Phone", "Phone", input, false);
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

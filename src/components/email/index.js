@@ -1,3 +1,3 @@
-import Email from "@/components/email/Email.vue";
+import Email from "../../components/email/Email.vue";
 
 export default Email;

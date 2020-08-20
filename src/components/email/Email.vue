@@ -17,13 +17,13 @@ export default {
 
   data() {
     return {
-      Value: ""
+      Value: "",
     };
   },
   props: {
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
     setRequired(input) {
@@ -39,7 +39,7 @@ export default {
         this.validateInput(input);
       }
     },
-    validateInput: function(input) {
+    validateInput: function (input) {
       const emailPattern = /^[\w.-]+@([\w-]+\.)+[a-zA-Z]+$/;
       if (emailPattern.test(input)) {
         console.log("validEmail " + input);
@@ -47,11 +47,11 @@ export default {
       } else {
         this.$emit("validating", "Email", "Email", input, false);
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

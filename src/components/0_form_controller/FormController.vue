@@ -27,53 +27,53 @@ export default {
   props: {
     loadForm: {
       type: Boolean,
-      default: true
+      default: true,
     },
     FormType: {
       type: Number,
-      default: 1
+      default: 1,
     },
     FormReactor: {
-      type: String
+      type: String,
     },
     Bjn: {
-      type: String
+      type: String,
     },
     AddFields: {
-      type: Object
+      type: Object,
     },
     ButtonText: {
-      type: String
+      type: String,
     },
     CtaText: {
-      type: String
+      type: String,
     },
     ClientLink: {
       type: String,
-      default: ""
+      default: "",
     },
     IsModal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     PostValues: {
-      type: Array
+      type: Array,
     },
     consent: {
       type: Boolean,
-      default: true
+      default: true,
     },
     inline: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ZapPost: {
-      type: String
+      type: String,
     },
     FormTest: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -85,22 +85,22 @@ export default {
       PropCtaText: this.CtaText,
       PropClientLink: this.ClientLink,
       PropIsModal: this.IsModal,
-      PropHideForm: false
+      PropHideForm: false,
     };
   },
   methods: {
-    ModalSwitch: function() {
+    ModalSwitch: function () {
       this.PropHideForm = !this.PropHideForm;
     },
     ModalLoad() {
       if (this.PropIsModal) {
         this.HideForm = true;
       }
-    }
+    },
   },
   mounted() {
     this.ModalLoad();
-  }
+  },
 };
 </script>
 

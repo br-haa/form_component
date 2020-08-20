@@ -1,2 +1,2 @@
-import CheckBoxHolder from "@/components/check_box_holder/CheckBoxHolder.vue";
+import CheckBoxHolder from "../../components/check_box_holder/CheckBoxHolder.vue";
 export default CheckBoxHolder;

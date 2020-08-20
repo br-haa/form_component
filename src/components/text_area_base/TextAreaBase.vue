@@ -27,33 +27,33 @@ export default {
       userInput: "",
       info: {
         name: this.AreaName,
-        filled: false
-      }
+        filled: false,
+      },
     };
   },
   props: {
     AreaText: {
-      type: String
+      type: String,
     },
     AreaId: {
-      type: String
+      type: String,
     },
     AreaName: {
-      type: String
+      type: String,
     },
     AreaType: {
       type: String,
-      default: `text`
+      default: `text`,
     },
     NotRequired: {
-      type: Boolean
+      type: Boolean,
     },
     SpanSize: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   methods: {
-    SetPlaceholder: function() {
+    SetPlaceholder: function () {
       if (this.NotRequired) {
         return this.AreaText;
       } else {
@@ -63,10 +63,10 @@ export default {
     checkFilled() {
       this.info.filled = this.userInput === "";
     },
-    SendUp: function() {
+    SendUp: function () {
       this.$emit("input", this.userInput);
-    }
-  }
+    },
+  },
 };
 </script>
 

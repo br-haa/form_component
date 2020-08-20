@@ -17,13 +17,13 @@ export default {
 
   data() {
     return {
-      Value: ""
+      Value: "",
     };
   },
   props: {
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
     setRequired(input) {
@@ -39,7 +39,7 @@ export default {
         this.validateInput(input);
       }
     },
-    validateInput: function(input) {
+    validateInput: function (input) {
       const emailPattern = /^[0-9]{5}(?:-[0-9]{4})?$/;
       if (emailPattern.test(input)) {
         console.log("validZip " + input);
@@ -47,11 +47,11 @@ export default {
       } else {
         this.$emit("validating", "Zip", "Zip", input, false);
       }
-    }
+    },
   },
   mounted() {
     this.setRequired(undefined);
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align:center; color:white; font-weight: bold" id="status">
+  <div style="text-align: center; color: white; font-weight: bold;" id="status">
     {{ statusText[0] }}
   </div>
 </template>
@@ -9,13 +9,13 @@ export default {
   name: "ErrorMessage",
   data() {
     return {
-      statusText: []
+      statusText: [],
     };
   },
   props: {
     ReceivedText: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   watch: {
     ReceivedText() {
@@ -23,7 +23,7 @@ export default {
         this.statusText = this.ReceivedText;
         this.openStatus();
       }
-    }
+    },
   },
   methods: {
     openStatus() {
@@ -51,8 +51,8 @@ export default {
 
     removeOnClick() {
       document.removeEventListener("click", this.closeStatus);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -29,30 +29,30 @@ export default {
       userInput: "",
       info: {
         name: this.BaseName,
-        filled: false
-      }
+        filled: false,
+      },
     };
   },
   props: {
     BaseText: {
-      type: String
+      type: String,
     },
     BaseId: {
-      type: String
+      type: String,
     },
     BaseName: {
-      type: String
+      type: String,
     },
     BaseType: {
       type: String,
-      default: `text`
+      default: `text`,
     },
     NotRequired: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
-    SetPlaceholder: function() {
+    SetPlaceholder: function () {
       if (this.NotRequired) {
         return this.BaseText;
       } else {
@@ -62,10 +62,10 @@ export default {
     checkFilled() {
       this.info.filled = this.userInput === "";
     },
-    SendUp: function() {
+    SendUp: function () {
       this.$emit("input", this.userInput);
-    }
-  }
+    },
+  },
 };
 </script>
 

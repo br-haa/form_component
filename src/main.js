@@ -9,7 +9,7 @@ const HaaFormComponents = {
 
       Vue.component(component.name, component);
     }
-  }
+  },
 };
 
 export default HaaFormComponents;

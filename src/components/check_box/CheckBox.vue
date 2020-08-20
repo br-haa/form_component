@@ -19,14 +19,14 @@ export default {
   name: "CheckBox",
   data() {
     return {
-      CheckStatus: false
+      CheckStatus: false,
     };
   },
   methods: {
-    SendUp: function() {
+    SendUp: function () {
       this.$emit("input", this.CheckStatus);
-    }
-  }
+    },
+  },
 };
 </script>
 

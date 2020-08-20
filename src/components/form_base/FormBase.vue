@@ -203,7 +203,7 @@ export default {
     ErrorMessage,
     PhoneNumber,
     Email,
-    TextField
+    TextField,
   },
 
   name: "FormBase",
@@ -212,69 +212,69 @@ export default {
     errorText: [], // where the error messages go
     thankYouActive: false, // triggers the thank-you page
     CtmObject: {}, // the final object that gets posted to CTM
-    AllData: [] // the combination of the validated objects and Post data
+    AllData: [], // the combination of the validated objects and Post data
   }),
   props: {
     AddedFields: {
-      type: Array
+      type: Array,
     },
     ButtonText: {
       type: String,
-      default: `Get Started!`
+      default: `Get Started!`,
     },
     FormType: {
-      type: Number
+      type: Number,
     },
     FormReactor: {
-      type: String
+      type: String,
     },
     Bjn: {
-      type: String
+      type: String,
     },
     ClientLink: {
-      type: String
+      type: String,
     },
     IsModal: {
-      type: Boolean
+      type: Boolean,
     },
     CtaText: {
-      type: String
+      type: String,
     },
     HideForm: {
-      type: Boolean
+      type: Boolean,
     },
     PostValues: {
-      type: Array
+      type: Array,
     },
     consent: {
-      type: Boolean
+      type: Boolean,
     },
     inline: {
-      type: Boolean
+      type: Boolean,
     },
     ZapPost: {
-      type: String
+      type: String,
     },
     FormTest: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   computed: {
-    getHideValues: function() {
+    getHideValues: function () {
       // controls what shows up if modal is or isn't active
       if (this.IsModal) {
         return !this.HideForm;
       } else {
         return true;
       }
-    }
+    },
   },
   methods: {
     trackValidation(name, id, value, status) {
       //pulls each of the objects from the fields or rather gets slapped with it at every button press.
       const obj = { name: name, id: id, value: value, status: status };
       let check = [];
-      this.validationObjects.forEach(item => {
+      this.validationObjects.forEach((item) => {
         // updates value if found
         if (item.id === id) {
           item.status = status;
@@ -285,7 +285,7 @@ export default {
         }
       });
       if (
-        check.some(x => {
+        check.some((x) => {
           return x;
         })
       ) {
@@ -298,7 +298,7 @@ export default {
     },
     FormPostStart() {
       if (
-        this.validationObjects.some(item => {
+        this.validationObjects.some((item) => {
           return !item.status;
         })
       ) {
@@ -317,7 +317,7 @@ export default {
         name: this.search(`FirstName`) + " " + this.search(`LastName`),
         phone: this.search(`Phone`),
         email: this.search(`Email`),
-        custom: {}
+        custom: {},
       };
       if (!this.PostValues) {
         this.setTimeStamp(); // updates time stamp
@@ -332,10 +332,10 @@ export default {
         this.setTimeStamp(); // updates time stamp
       }
       console.log("Posting this data"); // console logging the visible form data
-      this.AllData.forEach(x => {
+      this.AllData.forEach((x) => {
         console.log(x.id + " " + x.value);
       });
-      this.AllData.forEach(vo => {
+      this.AllData.forEach((vo) => {
         // adding all the post values and custom values to the custom object
         if (vo.id !== "Phone" && vo.id !== "Email") {
           // basically just not repeating phone and email
@@ -354,7 +354,7 @@ export default {
 
     HandleErrorMessage() {
       // error message handling. who could have guessed
-      this.validationObjects.forEach(x => {
+      this.validationObjects.forEach((x) => {
         if (!x.status) {
           this.errorText.push(`Please check ${x.name} is filled correctly`);
         }
@@ -369,7 +369,7 @@ export default {
       } else {
         this.$store.commit("Values/SortV", {
           id: "TimeStamp",
-          value: new Date().getTime() // TimeStamp set with Vuex
+          value: new Date().getTime(), // TimeStamp set with Vuex
         });
       }
     },
@@ -385,9 +385,9 @@ export default {
       );
       this.ThankYouPageActivate();
     },
-    sendZapPost: function() {
+    sendZapPost: function () {
       let custom = {};
-      this.AllData.forEach(vo => {
+      this.AllData.forEach((vo) => {
         // adding all the post values and custom values to the custom object
         custom[vo.id] = vo.value;
       });
@@ -401,7 +401,7 @@ export default {
       xhr.send(JSON.stringify(custom));
     },
 
-    search: function(id) {
+    search: function (id) {
       // grabbing object value by id name
       for (let i = 0; i < this.validationObjects.length; i++) {
         const oob = this.validationObjects[i];
@@ -418,7 +418,7 @@ export default {
       // pushing variables into designated arrays
       let obj = { id: value.id, value: value.value };
       let check = [];
-      destination.forEach(item => {
+      destination.forEach((item) => {
         if (item.id === value.id) {
           item.value = value.value;
           check.push(true);
@@ -427,7 +427,7 @@ export default {
         }
       });
       if (
-        check.some(x => {
+        check.some((x) => {
           return x === true;
         })
       ) {
@@ -436,8 +436,8 @@ export default {
         destination.push(obj);
         check = [];
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

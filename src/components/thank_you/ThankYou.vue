@@ -49,18 +49,18 @@ export default {
   props: {
     activated: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ClientLink: {
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
-    close: function() {
+    close: function () {
       //the back button that actually just reloads the page lul
       window.location.reload(true);
-    }
-  }
+    },
+  },
 };
 </script>
 
