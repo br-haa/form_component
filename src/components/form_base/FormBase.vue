@@ -254,6 +254,9 @@ export default {
     },
     ZapPost: {
       type: String
+    },
+    FormTest:{
+      type: Boolean
     }
   },
   computed: {
@@ -339,9 +342,13 @@ export default {
           this.CtmObject.custom[vo.id] = vo.value;
         }
       });
-      this.PostType1();
-      if (this.ZapPost) {
-        this.sendZapPost();
+      if (!this.FormTest) {
+        this.PostType1();
+        if (this.ZapPost) {
+          this.sendZapPost();
+        } else {
+          console.log("FORM TEST IS ACTIVE!");
+        }
       }
     },
 
