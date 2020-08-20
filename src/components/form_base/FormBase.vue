@@ -255,7 +255,7 @@ export default {
     ZapPost: {
       type: String
     },
-    FormTest:{
+    FormTest: {
       type: Boolean
     }
   },
@@ -363,13 +363,13 @@ export default {
     setTimeStamp() {
       if (this.PostValues) {
         this.pushValues(
-          { id: "TimeStamp", value: new Date().getTime() },
+          { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
           this.AllData
         );
       } else {
         this.$store.commit("Values/SortV", {
           id: "TimeStamp",
-          value: new Date().getTime()
+          value: new Date().getTime() // TimeStamp set with Vuex
         });
       }
     },
@@ -574,7 +574,7 @@ export default {
       background: rgba(255, 255, 255, 0.8);
       padding: 1rem 2rem;
       box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.66),
-        0px 0px 5px 3px rgba(0, 0, 0, 0.36), 0px 0px 3px 1px rgba(0, 0, 0, 0.76);
+        0 0 5px 3px rgba(0, 0, 0, 0.36), 0px 0px 3px 1px rgba(0, 0, 0, 0.76);
       margin-top: -2rem;
     }
   }
