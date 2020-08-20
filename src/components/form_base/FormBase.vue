@@ -316,13 +316,18 @@ export default {
         email: this.search(`Email`),
         custom: {}
       };
+      if (!this.PostValues) {
+        this.setTimeStamp(); // updates time stamp
+      }
       if (this.PostValues) {
         this.AllData = this.validationObjects.concat(this.PostValues);
       } else {
         const StoreValues = this.$store.state.Values.PostValues;
         this.AllData = [...this.validationObjects, ...StoreValues];
       }
-      this.setTimeStamp(); // updates time stamp
+      if (this.PostValues) {
+        this.setTimeStamp(); // updates time stamp
+      }
       console.log("Posting this data"); // console logging the visible form data
       this.AllData.forEach(x => {
         console.log(x.id + " " + x.value);
@@ -349,13 +354,17 @@ export default {
       });
     },
     setTimeStamp() {
-      this.pushValues(
-        {
+      if (this.PostValues) {
+        this.pushValues(
+          { id: "TimeStamp", value: new Date().getTime() },
+          this.AllData
+        );
+      } else {
+        this.$store.commit("Values/SortV", {
           id: "TimeStamp",
           value: new Date().getTime()
-        },
-        this.AllData
-      );
+        });
+      }
     },
 
     PostType1() {
