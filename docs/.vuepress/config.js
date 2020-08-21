@@ -2,8 +2,8 @@ module.exports = {
     locales: {
         '/': {
             lang: 'en-US',
-            title: 'Component Library 🥂',
-            description: 'Documentation site for the Vue component library plugin'
+            title: 'HAA Form',
+            description: 'Plug and Play Form (or thats the goal anyway)'
         }
     },
 
@@ -39,7 +39,7 @@ module.exports = {
                         {
                             title: 'Components',
                             collapsable: false,
-                            children: ['controller']
+                            children: ['FormController']
                         }
                     ]
                 }

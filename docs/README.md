@@ -4,7 +4,7 @@ heroImage:
 actionText: Get Started →
 actionLink: /guide
 features:
-  - title: Feature 1
+  - title: Install
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   - title: Feature 2
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
