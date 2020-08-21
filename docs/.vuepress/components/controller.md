@@ -4,7 +4,7 @@ Wow! This component is awesome.
 
 ## Example
 
-<Demo componentName="examples-standard-component-doc" />
+<Demo componentName="examples-controller-doc" />
 
 ## Source Code
 
