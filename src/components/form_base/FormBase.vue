@@ -26,16 +26,22 @@
                 >
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`First Name`"
+                    :text-text="getFirstNamePlaceholder"
                     :text-id="'FirstName'"
                   ></text-field>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`Last Name`"
+                    :text-text="getLastNamePlaceholder"
                     :text-id="'LastName'"
                   ></text-field>
-                  <email @validating="trackValidation"></email>
-                  <phone-number @validating="trackValidation"></phone-number>
+                  <email
+                    @validating="trackValidation"
+                    :email-text="EmailPlaceholder"
+                  ></email>
+                  <phone-number
+                    @validating="trackValidation"
+                    :phone-text="PhonePlaceholder"
+                  ></phone-number>
                   <div class="addedFieldsGrid" v-if="AddedFields">
                     <text-field
                       class="BasicField"
@@ -54,32 +60,42 @@
                   <div class="name-grid">
                     <text-field
                       @validating="trackValidation"
-                      :text-text="`First Name`"
+                      :text-text="getFirstNamePlaceholder"
                       :text-id="'FirstName'"
                     ></text-field>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="`Last Name`"
+                      :text-text="getLastNamePlaceholder"
                       :text-id="'LastName'"
                     ></text-field>
                   </div>
-                  <email @validating="trackValidation"></email>
-                  <phone-number @validating="trackValidation"></phone-number>
+                  <email
+                    @validating="trackValidation"
+                    :email-text="EmailPlaceholder"
+                  ></email>
+                  <phone-number
+                    @validating="trackValidation"
+                    :phone-text="PhonePlaceholder"
+                  ></phone-number>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`Address`"
+                    :text-text="getAddressPlaceholder"
                     :text-id="'Address'"
                   ></text-field>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`City`"
+                    :text-text="CityPlaceholder"
                     :text-id="'City'"
                   ></text-field>
                   <div class="state-zip-grid">
                     <StateDropdown
                       @validating="trackValidation"
+                      :state-text="StatePlaceholder"
                     ></StateDropdown>
-                    <Zip @validating="trackValidation"></Zip>
+                    <Zip
+                      @validating="trackValidation"
+                      :zip-text="ZipPlaceholder"
+                    ></Zip>
                   </div>
                   <div class="addedFieldsGrid" v-if="AddedFields">
                     <text-field
@@ -99,42 +115,53 @@
                   <div class="name-grid">
                     <text-field
                       @validating="trackValidation"
-                      :text-text="`First Name`"
+                      :text-text="getFirstNamePlaceholder"
                       :text-id="'FirstName'"
                     ></text-field>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="`Last Name`"
+                      :text-text="getLastNamePlaceholder"
                       :text-id="'LastName'"
                     ></text-field>
                   </div>
-                  <email @validating="trackValidation"></email>
-                  <phone-number @validating="trackValidation"></phone-number>
+                  <email
+                    @validating="trackValidation"
+                    :email-text="EmailPlaceholder"
+                  ></email>
+                  <phone-number
+                    @validating="trackValidation"
+                    :phone-text="PhonePlaceholder"
+                  ></phone-number>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`Address`"
+                    :text-text="getAddressPlaceholder"
                     :text-id="'Address'"
                   ></text-field>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="`City`"
+                    :text-text="getCityPlaceholder"
                     :text-id="'City'"
                   ></text-field>
                   <div class="state-zip-grid">
                     <StateDropdown
                       @validating="trackValidation"
+                      :state-text="StatePlaceholder"
                     ></StateDropdown>
-                    <Zip @validating="trackValidation"></Zip>
+                    <Zip
+                      @validating="trackValidation"
+                      :zip-text="ZipPlaceholder"
+                    ></Zip>
                   </div>
                   <DateInput
                     class="long-span"
+                    :date-text="DatePlaceholder"
                     @validating="trackValidation"
                   ></DateInput>
                   <StateDropdown
                     class="long-span"
                     @validating="trackValidation"
                     :duplicate="2"
-                    :state-text="undefined"
+                    :state-text="State2Placeholder"
                   ></StateDropdown>
                   <div class="addedFieldsGrid" v-if="AddedFields">
                     <text-field
@@ -149,10 +176,9 @@
                     ></text-field>
                   </div>
                 </div>
-
                 <text-area
                   @validating="trackValidation"
-                  :text-text="`Message`"
+                  :text-text="MessagePlaceholder"
                   :text-id="'Message'"
                   :not-required="true"
                   :form-type="FormType"
@@ -179,7 +205,6 @@
     </transition>
   </div>
 </template>
-
 <script>
 import TextField from "../text_field/TextField.vue";
 import Email from "../email/Email.vue";
@@ -258,6 +283,39 @@ export default {
     FormTest: {
       type: Boolean,
     },
+    FirstNamePlaceholder: {
+      type: String,
+    },
+    LastNamePlaceholder: {
+      type: String,
+    },
+    EmailPlaceholder: {
+      type: String,
+    },
+    PhonePlaceholder: {
+      type: String,
+    },
+    AddressPlaceholder: {
+      type: String,
+    },
+    CityPlaceholder: {
+      type: String,
+    },
+    StatePlaceholder: {
+      type: String,
+    },
+    ZipPlaceholder: {
+      type: String,
+    },
+    DatePlaceholder: {
+      type: String,
+    },
+    State2Placeholder: {
+      type: String,
+    },
+    MessagePlaceholder: {
+      type: String,
+    },
   },
   computed: {
     getHideValues: function () {
@@ -266,6 +324,34 @@ export default {
         return !this.HideForm;
       } else {
         return true;
+      }
+    },
+    getFirstNamePlaceholder() {
+      if (this.FirstNamePlaceholder) {
+        return this.FirstNamePlaceholder;
+      } else {
+        return "First Name";
+      }
+    },
+    getLastNamePlaceholder() {
+      if (this.LastNamePlaceholder) {
+        return this.LastNamePlaceholder;
+      } else {
+        return "Last Name";
+      }
+    },
+    getCityPlaceholder() {
+      if (this.CityPlaceholder) {
+        return this.CityPlaceholder;
+      } else {
+        return "City";
+      }
+    },
+    getAddressPlaceholder() {
+      if (this.AddressPlaceholder) {
+        return this.AddressPlaceholder;
+      } else {
+        return "Address";
       }
     },
   },

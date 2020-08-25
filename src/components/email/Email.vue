@@ -1,7 +1,7 @@
 <template>
   <BaseField
     @input="setRequired"
-    :base-text="`Email`"
+    :base-text="EmailText"
     :base-id="`Email`"
     :base-name="`email`"
     :base-type="`email`"
@@ -23,6 +23,10 @@ export default {
   props: {
     NotRequired: {
       type: Boolean,
+    },
+    EmailText: {
+      type: String,
+      default: "Email",
     },
   },
   methods: {

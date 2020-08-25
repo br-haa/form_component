@@ -1,7 +1,7 @@
 <template>
   <BaseField
     @input="setRequired"
-    :base-text="`Phone`"
+    :base-text="PhoneText"
     :base-id="`Phone`"
     :base-name="`phone`"
     :base-type="`tel`"
@@ -17,6 +17,10 @@ export default {
   props: {
     NotRequired: {
       type: Boolean,
+    },
+    PhoneText: {
+      type: String,
+      default: "Phone",
     },
   },
   methods: {

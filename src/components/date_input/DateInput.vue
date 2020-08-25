@@ -1,7 +1,7 @@
 <template>
   <DateBase
     @input="setRequired"
-    :base-text="`Date`"
+    :base-text="DateText"
     :base-id="`date`"
     :base-name="`date`"
     :base-type="`date`"
@@ -24,6 +24,10 @@ export default {
   props: {
     NotRequired: {
       type: Boolean,
+    },
+    DateText: {
+      type: String,
+      default: "Date",
     },
   },
   methods: {

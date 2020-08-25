@@ -1,7 +1,7 @@
 <template>
   <BaseField
     @input="setRequired"
-    :base-text="`Zip`"
+    :base-text="ZipText"
     :base-id="`Zip`"
     :base-name="`zip`"
     :base-type="`zip`"
@@ -23,6 +23,9 @@ export default {
   props: {
     NotRequired: {
       type: Boolean,
+    },
+    ZipText: {
+      type: String,
     },
   },
   methods: {

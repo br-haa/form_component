@@ -15,6 +15,17 @@
     :inline="inline"
     :zap-post="ZapPost"
     :form-test="FormTest"
+    :first-name-placeholder="FirstNamePlaceholder"
+    :last-name-placeholder="LastNamePlaceholder"
+    :email-placeholder="EmailPlaceholder"
+    :phone-placeholder="PhonePlaceholder"
+    :address-placeholder="AddressPlaceholder"
+    :city-placeholder="CityPlaceholder"
+    :state-placeholder="State2Placeholder"
+    :zip-placeholder="ZipPlaceholder"
+    :date-placeholder="DatePlaceholder"
+    :state2-placeholder="State2Placeholder"
+    :message-placeholder="MessagePlaceholder"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -73,6 +84,39 @@ export default {
     FormTest: {
       type: Boolean,
       default: false,
+    },
+    FirstNamePlaceholder: {
+      type: String,
+    },
+    LastNamePlaceholder: {
+      type: String,
+    },
+    EmailPlaceholder: {
+      type: String,
+    },
+    PhonePlaceholder: {
+      type: String,
+    },
+    MessagePlaceholder: {
+      type: String,
+    },
+    AddressPlaceholder: {
+      type: String,
+    },
+    CityPlaceholder: {
+      type: String,
+    },
+    StatePlaceholder: {
+      type: String,
+    },
+    ZipPlaceholder: {
+      type: String,
+    },
+    DatePlaceholder: {
+      type: String,
+    },
+    State2Placeholder: {
+      type: String,
     },
   },
   data() {
