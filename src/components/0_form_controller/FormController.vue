@@ -15,17 +15,17 @@
     :inline="inline"
     :zap-post="ZapPost"
     :form-test="FormTest"
-    :first-name-placeholder="FirstNamePlaceholder"
-    :last-name-placeholder="LastNamePlaceholder"
-    :email-placeholder="EmailPlaceholder"
-    :phone-placeholder="PhonePlaceholder"
-    :address-placeholder="AddressPlaceholder"
-    :city-placeholder="CityPlaceholder"
-    :state-placeholder="State2Placeholder"
-    :zip-placeholder="ZipPlaceholder"
-    :date-placeholder="DatePlaceholder"
-    :state2-placeholder="State2Placeholder"
-    :message-placeholder="MessagePlaceholder"
+    :first-name-placeholder="PropFirstNamePlaceholder"
+    :last-name-placeholder="PropLastNamePlaceholder"
+    :email-placeholder="PropEmailPlaceholder"
+    :phone-placeholder="PropPhonePlaceholder"
+    :address-placeholder="PropAddressPlaceholder"
+    :city-placeholder="PropCityPlaceholder"
+    :state-placeholder="PropState2Placeholder"
+    :zip-placeholder="PropZipPlaceholder"
+    :date-placeholder="PropDatePlaceholder"
+    :state2-placeholder="PropState2Placeholder"
+    :message-placeholder="PropMessagePlaceholder"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -129,6 +129,17 @@ export default {
       PropCtaText: this.CtaText,
       PropClientLink: this.ClientLink,
       PropIsModal: this.IsModal,
+      PropFirstNamePlaceholder: this.FirstNamePlaceholder,
+      PropLastNamePlaceholder: this.LastNamePlaceholder,
+      PropEmailPlaceholder: this.EmailPlaceholder,
+      PropPhonePlaceholder: this.PhonePlaceholder,
+      PropAddressPlaceholder: this.AddressPlaceholder,
+      PropCityPlaceholder: this.CityPlaceholder,
+      PropStatePlaceholder: this.StatePlaceholder,
+      PropZipPlaceholder: this.ZipPlaceholder,
+      PropDatePlaceholder: this.DatePlaceholder,
+      PropState2Placeholder: this.State2Placeholder,
+      PropMessagePlaceholder: this.MessagePlaceholder,
       PropHideForm: false,
     };
   },
