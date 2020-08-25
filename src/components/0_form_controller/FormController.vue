@@ -26,6 +26,7 @@
     :date-placeholder="PropDatePlaceholder"
     :state2-placeholder="PropState2Placeholder"
     :message-placeholder="PropMessagePlaceholder"
+    :consent-text="PropConsentText"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -118,6 +119,9 @@ export default {
     State2Placeholder: {
       type: String,
     },
+    ConsentText: {
+      type: String
+    }
   },
   data() {
     return {
@@ -140,6 +144,7 @@ export default {
       PropDatePlaceholder: this.DatePlaceholder,
       PropState2Placeholder: this.State2Placeholder,
       PropMessagePlaceholder: this.MessagePlaceholder,
+      PropConsentText: this.ConsentText,
       PropHideForm: false,
     };
   },

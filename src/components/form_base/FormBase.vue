@@ -186,6 +186,7 @@
                 <check-box-holder
                   @validating="trackValidation"
                   v-if="consent"
+                  :consent-text="ConsentText"
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">
@@ -314,6 +315,9 @@ export default {
       type: String,
     },
     MessagePlaceholder: {
+      type: String,
+    },
+    ConsentText: {
       type: String,
     },
   },
@@ -659,8 +663,8 @@ export default {
       box-sizing: border-box;
       background: rgba(255, 255, 255, 0.8);
       padding: 1rem 2rem;
-      box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.66),
-        0 0 5px 3px rgba(0, 0, 0, 0.36), 0px 0px 3px 1px rgba(0, 0, 0, 0.76);
+      box-shadow: 0 0 7px 7px rgba(0, 0, 0, 0.66),
+        0 0 5px 3px rgba(0, 0, 0, 0.36), 0 0 3px 1px rgba(0, 0, 0, 0.76);
       margin-top: -2rem;
     }
   }
