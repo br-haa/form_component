@@ -1,6 +1,6 @@
 <template>
   <form-base
-    v-if="loadForm"
+    v-if="MainFormSwitch"
     :cta-text="PropCtaText"
     :hide-form="PropHideForm"
     :is-modal="PropIsModal"
@@ -150,6 +150,7 @@ export default {
       PropMessagePlaceholder: this.MessagePlaceholder,
       PropConsentText: this.ConsentText,
       PropHideForm: false,
+      MainFormSwitch: true,
     };
   },
   watch: {
@@ -157,9 +158,17 @@ export default {
       this.ModalSwitch();
     },
   },
+
   methods: {
     ModalSwitch: function () {
-      this.loadForm = !this.loadForm;
+      this.MainFormSwitch = !this.MainFormSwitch;
+    },
+    ModalLoad: function () {
+      if (this.PropIsModal) {
+        this.MainFormSwitch = false;
+      } else {
+        this.MainFormSwitch = this.loadForm;
+      }
     },
   },
   mounted() {
