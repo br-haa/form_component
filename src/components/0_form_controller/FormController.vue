@@ -159,7 +159,7 @@ export default {
   },
   methods: {
     ModalSwitch: function () {
-      this.PropHideForm = !this.PropHideForm;
+      this.loadForm = !this.loadForm;
     },
   },
   mounted() {
