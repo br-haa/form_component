@@ -68,6 +68,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    HideForm: {
+      type: Boolean,
+    },
     PostValues: {
       type: Array,
     },
@@ -120,8 +123,8 @@ export default {
       type: String,
     },
     ConsentText: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
@@ -148,13 +151,18 @@ export default {
       PropHideForm: false,
     };
   },
+  watch: {
+    HideForm: function () {
+      this.ModalSwitch();
+    },
+  },
   methods: {
     ModalSwitch: function () {
       this.PropHideForm = !this.PropHideForm;
     },
     ModalLoad() {
       if (this.PropIsModal) {
-        this.HideForm = true;
+        this.PropHideForm = true;
       }
     },
   },
