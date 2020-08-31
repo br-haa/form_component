@@ -2,12 +2,37 @@
 `npm install haa-form`
 # PHP set up
 
+## Web pack install
+`npm install webpack-cli webpack copy-webpack-plugin --save-dev`
+
+## Web pack config (webpack.config.js)
+```
+const CopyPlugin = require('copy-webpack-plugin');
+
+module.exports = {
+    mode: "production",
+    entry:{
+       form:'./node_modules/haa-form/dist/haa-form.umd.min.js'
+    }
+    ,
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: './node_modules/haa-form/dist/haa-form.css', to: 'form.css' },
+                { from: './node_modules/vue/dist/vue.min.js', to: 'vue.min.js' },
+            ],
+        }),
+    ],
+};
+```
+## type webpack in the command line
 ## css link
-`<link rel="stylesheet" type="text/css" href="node_modules/haa-form/dist/haa-form.css">`
+`<link rel="stylesheet" type="text/css" href="dist/form.css">`
+
 ## Main form file
 ```
-<script src="node_modules/vue/dist/vue.min.js"></script>
-<script src="node_modules/haa-form/dist/haa-form.umd.min.js"></script>
+<script src="dist/vue.min.js"></script>
+<script src="dist/form.js"></script>
 
 <?php
 if(isset($_GET['geo'])) {
