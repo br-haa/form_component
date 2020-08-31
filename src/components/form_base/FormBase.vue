@@ -7,7 +7,7 @@
       :client-link="ClientLink"
     ></thank-you>
     <transition name="fade">
-      <div v-if="getHideValues" v-bind:class="{ 'form-is-modal': IsModal }">
+      <div v-if="HideForm" v-bind:class="{ 'form-is-modal': IsModal }">
         <div id="form-outside">
           <div class="XHolder" v-if="IsModal">
             <button class="modal-close" v-on:click="$emit(`modal-control`)">
@@ -15,7 +15,7 @@
             </button>
           </div>
           <transition name="in-out" appear>
-            <div id="form-inside" v-if="getHideValues">
+            <div id="form-inside" v-if="HideForm">
               <div class="cta-text">
                 <h2>{{ CtaText }}</h2>
               </div>
@@ -322,14 +322,14 @@ export default {
     },
   },
   computed: {
-    getHideValues: function () {
-      // controls what shows up if modal is or isn't active
-      if (this.IsModal) {
-        return !this.HideForm;
-      } else {
-        return true;
-      }
-    },
+    // getHideValues: function () {
+    //   // controls what shows up if modal is or isn't active
+    //   if (this.IsModal) {
+    //     return !this.HideForm;
+    //   } else {
+    //     return true;
+    //   }
+    // },
     getFirstNamePlaceholder() {
       if (this.FirstNamePlaceholder) {
         return this.FirstNamePlaceholder;
