@@ -25,7 +25,7 @@ module.exports = {
     ],
 };
 ```
-# type webpack in the command line
+# type __webpack__ in the command line
 ## css link
 `<link rel="stylesheet" type="text/css" href="dist/form.css">`
 
