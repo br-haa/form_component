@@ -161,11 +161,6 @@ export default {
     ModalSwitch: function () {
       this.PropHideForm = !this.PropHideForm;
     },
-    ModalLoad() {
-      if (this.PropIsModal) {
-        this.PropHideForm = true;
-      }
-    },
   },
   mounted() {
     this.ModalLoad();
