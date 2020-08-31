@@ -70,6 +70,7 @@ export default {
     },
     HideForm: {
       type: Boolean,
+      default: false,
     },
     PostValues: {
       type: Array,
