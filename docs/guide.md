@@ -2,6 +2,8 @@
 `npm install haa-form`
 # PHP set up
 
+### type __npm init__
+
 ## Web pack install
 `npm install webpack-cli webpack copy-webpack-plugin --save-dev`
 
@@ -65,16 +67,10 @@ if($dynamic_num){  // replace with project phone var
 <div id="FormHolder">
     <form-controller
     :form-type="1"
-    :button-text="'hi'"
     :form-reactor="''"
     :Bjn="''"
-    :add-fields="undefined"
-    :cta-text="undefined"
-    :client-link="'here.com'"
-    :is-modal="true"
-    :hide-form="false"
+    :client-link="'replaceme.com'"
     :post-values="PostValues"
-    :form-test="true"
     ></form-controller>
 </div>
 
@@ -112,16 +108,11 @@ Vue.use(HaaFormComponents)
   <div>
     <Nuxt />
     <form-controller
-      :form-type="1"
-      :button-text="'Click ME'"
-      :form-reactor="''"
-      :Bjn="''"
-      :add-fields="undefined"
-      :cta-text="undefined"
-      :client-link="'here.com'"
-      :is-modal="false"
-      :hide-form="false"
-      :consent="false"
+         :form-type="1"
+         :form-reactor="''"
+         :Bjn="''"
+         :client-link="'replaceme.com'"
+         :post-values="PostValues"
     ></form-controller>
   </div>
 </template>
