@@ -2,7 +2,7 @@
 `npm install haa-form`
 # PHP set up
 
-### type __npm init__
+## type **npm init** (and then hammer return)
 
 ## Web pack install
 `npm install webpack-cli webpack copy-webpack-plugin --save-dev`
