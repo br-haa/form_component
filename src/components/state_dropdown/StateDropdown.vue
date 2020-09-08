@@ -6,6 +6,7 @@
     :base-id="`States`"
     :base-name="`states`"
     :not-required="NotRequired"
+    :passed="passed"
   ></DropdownBase>
 </template>
 
@@ -253,6 +254,7 @@ export default {
         abbreviation: "WY",
       },
     ],
+    passed: false,
   }),
   props: {
     NotRequired: {
@@ -291,6 +293,7 @@ export default {
           input,
           true
         );
+        this.passed = true;
       } else {
         this.$emit(
           "validating",
@@ -299,6 +302,7 @@ export default {
           input,
           false
         );
+        this.passed = false
       }
     },
   },

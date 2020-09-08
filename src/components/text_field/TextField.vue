@@ -6,6 +6,7 @@
     :base-name="getDefaultName"
     :base-type="`text`"
     :not-required="NotRequired"
+    :passed="passed"
   ></BaseField>
 </template>
 
@@ -39,7 +40,7 @@ export default {
   },
   data() {
     return {
-      pls: ``,
+      passed: false
     };
   },
   methods: {
@@ -61,6 +62,7 @@ export default {
       if (input !== undefined && input !== "") {
         // making sure its not undefined or an empty string
         this.$emit("validating", this.getDefaultName, this.TextId, input, true);
+        this.passed = true;
       } else {
         this.$emit(
           "validating",
@@ -69,6 +71,7 @@ export default {
           input,
           false
         );
+        this.passed = false;
       }
     },
   },

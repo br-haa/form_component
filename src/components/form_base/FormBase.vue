@@ -436,9 +436,9 @@ export default {
         this.PostType1();
         if (this.ZapPost) {
           this.sendZapPost();
-        } else {
-          console.log("FORM TEST IS ACTIVE!");
-        }
+        }} else {
+        this.ThankYouPageActivate();
+        console.log('%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!', 'color: black; background: red');
       }
     },
 
@@ -532,6 +532,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$accent-color: orange !default;
 .form1 {
   display: grid;
   grid-gap: 1.5rem;
@@ -644,19 +645,29 @@ export default {
     height: 3px;
     background: black;
   }
+  @media (max-width: 640px) {
+    margin-top: 1rem;
+  }
 }
 .form-is-modal {
   #form-outside {
     width: 100vw;
     height: 100vh;
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
-    background: rgba(2, 2, 19, 0.86);
+    background: rgba(2, 2, 19, 0.85);
     display: grid;
     padding: 1rem;
     box-sizing: border-box;
     grid-template-rows: auto 1fr;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     #form-inside {
       align-self: center;
       justify-self: center;
@@ -723,7 +734,7 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background: yellow;
+    background: $accent-color;
     clip-path: polygon(
       20% 0%,
       0% 20%,
@@ -756,5 +767,29 @@ export default {
 }
 .cta-text {
   text-align: center;
+}
+#SubmitButton{
+  background: $accent-color;
+}
+.btn1{
+  cursor: pointer;
+  padding: .5rem 1rem .5rem 1rem;
+  border: none;
+  box-shadow: 0 0 3px 1px black;
+  transition: .1s;
+  border-radius: 1px;
+}
+.btn1:hover{
+  box-shadow: 0 0 2.5px 1px black;
+  transition: .1s;
+  transform: scale(1.015);
+}
+.btn1:focus{
+  outline: none;
+}
+.btn1:active{
+  box-shadow: 0 0 1px 1px black;
+  transition: .01s;
+  transform: scale(.99)
 }
 </style>

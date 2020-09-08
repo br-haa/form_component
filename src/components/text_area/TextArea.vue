@@ -7,6 +7,7 @@
     :area-type="`text`"
     :not-required="NotRequired"
     :span-size="getSpanSize"
+    :passed="passed"
   ></TextAreaBase>
 </template>
 
@@ -52,7 +53,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      passed: false,
+    };
   },
   methods: {
     setRequired(input) {
@@ -71,6 +74,7 @@ export default {
     validateInput: function (input) {
       if (input !== undefined && input !== "") {
         this.$emit("validating", this.getDefaultName, this.TextId, input, true);
+        this.passed = true;
       } else {
         this.$emit(
           "validating",
@@ -79,6 +83,7 @@ export default {
           input,
           false
         );
+        this.passed = false;
       }
     },
   },

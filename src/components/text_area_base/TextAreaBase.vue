@@ -7,6 +7,7 @@
   >
     <span class="fieldText">{{ SetPlaceholder() }}</span>
     <textarea
+      :class="{ passed: passed }"
       @input="SendUp"
       @focus="focused = true"
       @blur="focused = false"
@@ -51,6 +52,9 @@ export default {
     SpanSize: {
       type: Number,
     },
+    passed:{
+      type: Boolean,
+    },
   },
   methods: {
     SetPlaceholder: function () {
@@ -72,7 +76,9 @@ export default {
 
 <style scoped lang="scss">
 $small-size: 640px;
-
+.passed {
+  border-bottom: #3eaf7c solid 2px;
+}
 .fields {
   display: grid;
   .fieldText {
@@ -90,6 +96,9 @@ $small-size: 640px;
     grid-area: 1 / 1 / 2 / 2;
     resize: none;
     height: 150px;
+    @media (max-width: 640px) {
+      height: 100px;
+    }
   }
 }
 .fieldFocus {
@@ -97,12 +106,12 @@ $small-size: 640px;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 11;
     margin: 0 0 0 0;
-    transform: translateY(-1.2rem);
+    transform: translateY(-1rem);
     transition: 0.3s;
-    font-size: 1rem;
+    font-size: 0.7rem;
     @media (max-width: $small-size) {
       transform: translateY(-1rem);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
   }
 }

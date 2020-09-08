@@ -6,6 +6,7 @@
   >
     <span class="fieldText">{{ SetPlaceholder() }}</span>
     <select
+      :class="{ passed: passed }"
       :name="BaseName"
       @change="SendUp"
       @focus="focused = true"
@@ -56,6 +57,9 @@ export default {
       type: String,
       default: "Pick An Option",
     },
+    passed:{
+      type: Boolean,
+    }
   },
   methods: {
     SetPlaceholder() {
@@ -77,6 +81,9 @@ export default {
 
 <style scoped lang="scss">
 $small-size: 640px;
+.passed {
+  border-bottom: #3eaf7c solid 2px;
+}
 .fields {
   display: grid;
   .fieldText {
@@ -98,12 +105,12 @@ $small-size: 640px;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 11;
     margin: 0 0 0 0;
-    transform: translateY(-1.2rem);
+    transform: translateY(-1rem);
     transition: 0.3s;
-    font-size: 1rem;
+    font-size: 0.7rem;
     @media (max-width: $small-size) {
       transform: translateY(-1rem);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
   }
 }

@@ -6,6 +6,7 @@
   >
     <span class="fieldText">{{ SetPlaceholder() }}</span>
     <input
+      :class="{ passed: passed }"
       @input="SendUp"
       @focus="focused = true"
       @blur="
@@ -50,6 +51,10 @@ export default {
     NotRequired: {
       type: Boolean,
     },
+    passed: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     // sets the asterisk for required fields
@@ -71,6 +76,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.passed {
+  border-bottom: #3eaf7c solid 2px;
+}
 $small-size: 640px;
 .fields {
   display: grid;
@@ -94,12 +102,12 @@ $small-size: 640px;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 11;
     margin: 0 0 0 0;
-    transform: translateY(-1.2rem);
+    transform: translateY(-1rem);
     transition: 0.3s;
-    font-size: 1rem;
+    font-size: 0.7rem;
     @media (max-width: $small-size) {
       transform: translateY(-1rem);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
   }
 }

@@ -6,6 +6,7 @@
     :base-name="`phone`"
     :base-type="`tel`"
     :not-required="NotRequired"
+    :passed="passed"
   ></BaseField>
 </template>
 
@@ -14,6 +15,11 @@ import BaseField from "../base_field/BaseField.vue";
 export default {
   components: { BaseField },
   name: "PhoneNumber",
+  data(){
+    return{
+      passed: false,
+    }
+  },
   props: {
     NotRequired: {
       type: Boolean,
@@ -42,8 +48,10 @@ export default {
       if (phonePattern.test(input)) {
         console.log("checking phone " + input);
         this.$emit("validating", "Phone", "Phone", input, true);
+        this.passed = true;
       } else {
         this.$emit("validating", "Phone", "Phone", input, false);
+        this.passed = false;
       }
     },
   },

@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$accent-color: #4a8aff;
+$accent-color: orange !default;
 #consent {
   display: none;
 }

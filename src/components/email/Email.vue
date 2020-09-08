@@ -6,6 +6,7 @@
     :base-name="`email`"
     :base-type="`email`"
     :not-required="NotRequired"
+    :passed="passed"
   ></BaseField>
 </template>
 
@@ -18,6 +19,7 @@ export default {
   data() {
     return {
       Value: "",
+      passed: false,
     };
   },
   props: {
@@ -48,8 +50,10 @@ export default {
       if (emailPattern.test(input)) {
         console.log("validEmail " + input);
         this.$emit("validating", "Email", "Email", input, true);
+        this.passed = true;
       } else {
         this.$emit("validating", "Email", "Email", input, false);
+        this.passed = false;
       }
     },
   },

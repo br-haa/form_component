@@ -6,6 +6,7 @@
     :base-name="`zip`"
     :base-type="`zip`"
     :not-required="NotRequired"
+    :passed="passed"
   ></BaseField>
 </template>
 
@@ -18,6 +19,7 @@ export default {
   data() {
     return {
       Value: "",
+      passed: false,
     };
   },
   props: {
@@ -47,8 +49,10 @@ export default {
       if (emailPattern.test(input)) {
         console.log("validZip " + input);
         this.$emit("validating", "Zip", "Zip", input, true);
+        this.passed = true;
       } else {
         this.$emit("validating", "Zip", "Zip", input, false);
+        this.passed = false;
       }
     },
   },
