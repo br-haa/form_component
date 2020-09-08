@@ -26,12 +26,12 @@
                 >
                   <text-field
                     @validating="trackValidation"
-                    :text-text="getFirstNamePlaceholder"
+                    :text-text="FirstNamePlaceholder"
                     :text-id="'FirstName'"
                   ></text-field>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="getLastNamePlaceholder"
+                    :text-text="LastNamePlaceholder"
                     :text-id="'LastName'"
                   ></text-field>
                   <email
@@ -60,12 +60,12 @@
                   <div class="name-grid">
                     <text-field
                       @validating="trackValidation"
-                      :text-text="getFirstNamePlaceholder"
+                      :text-text="FirstNamePlaceholder"
                       :text-id="'FirstName'"
                     ></text-field>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="getLastNamePlaceholder"
+                      :text-text="LastNamePlaceholder"
                       :text-id="'LastName'"
                     ></text-field>
                   </div>
@@ -79,7 +79,7 @@
                   ></phone-number>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="getAddressPlaceholder"
+                    :text-text="AddressPlaceholder"
                     :text-id="'Address'"
                   ></text-field>
                   <text-field
@@ -115,12 +115,12 @@
                   <div class="name-grid">
                     <text-field
                       @validating="trackValidation"
-                      :text-text="getFirstNamePlaceholder"
+                      :text-text="FirstNamePlaceholder"
                       :text-id="'FirstName'"
                     ></text-field>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="getLastNamePlaceholder"
+                      :text-text="LastNamePlaceholder"
                       :text-id="'LastName'"
                     ></text-field>
                   </div>
@@ -134,12 +134,12 @@
                   ></phone-number>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="getAddressPlaceholder"
+                    :text-text="AddressPlaceholder"
                     :text-id="'Address'"
                   ></text-field>
                   <text-field
                     @validating="trackValidation"
-                    :text-text="getCityPlaceholder"
+                    :text-text="CityPlaceholder"
                     :text-id="'City'"
                   ></text-field>
                   <div class="state-zip-grid">
@@ -286,77 +286,50 @@ export default {
     },
     FirstNamePlaceholder: {
       type: String,
+      default: "First Name",
     },
     LastNamePlaceholder: {
       type: String,
+      default: "Last Name",
     },
     EmailPlaceholder: {
       type: String,
+      default: "Email",
     },
     PhonePlaceholder: {
       type: String,
+      default: "Phone",
     },
     AddressPlaceholder: {
       type: String,
+      default: "Address",
     },
     CityPlaceholder: {
       type: String,
+      default: "City",
     },
     StatePlaceholder: {
       type: String,
+      default: "Pick Your State",
     },
     ZipPlaceholder: {
       type: String,
+      default: "Zip",
     },
     DatePlaceholder: {
       type: String,
+      default: "Date",
     },
     State2Placeholder: {
       type: String,
+      default: "Where did the accident happen?",
     },
     MessagePlaceholder: {
       type: String,
+      default: "Message",
     },
     ConsentText: {
       type: String,
-    },
-  },
-  computed: {
-    // getHideValues: function () {
-    //   // controls what shows up if modal is or isn't active
-    //   if (this.IsModal) {
-    //     return !this.HideForm;
-    //   } else {
-    //     return true;
-    //   }
-    // },
-    getFirstNamePlaceholder() {
-      if (this.FirstNamePlaceholder) {
-        return this.FirstNamePlaceholder;
-      } else {
-        return "First Name";
-      }
-    },
-    getLastNamePlaceholder() {
-      if (this.LastNamePlaceholder) {
-        return this.LastNamePlaceholder;
-      } else {
-        return "Last Name";
-      }
-    },
-    getCityPlaceholder() {
-      if (this.CityPlaceholder) {
-        return this.CityPlaceholder;
-      } else {
-        return "City";
-      }
-    },
-    getAddressPlaceholder() {
-      if (this.AddressPlaceholder) {
-        return this.AddressPlaceholder;
-      } else {
-        return "Address";
-      }
     },
   },
   methods: {
@@ -436,9 +409,13 @@ export default {
         this.PostType1();
         if (this.ZapPost) {
           this.sendZapPost();
-        }} else {
+        }
+      } else {
         this.ThankYouPageActivate();
-        console.log('%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!', 'color: black; background: red');
+        console.log(
+          "%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!",
+          "color: black; background: red"
+        );
       }
     },
 
@@ -768,28 +745,28 @@ $accent-color: orange !default;
 .cta-text {
   text-align: center;
 }
-#SubmitButton{
+#SubmitButton {
   background: $accent-color;
 }
-.btn1{
+.btn1 {
   cursor: pointer;
-  padding: .5rem 1rem .5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   border: none;
   box-shadow: 0 0 3px 1px black;
-  transition: .1s;
+  transition: 0.1s;
   border-radius: 1px;
 }
-.btn1:hover{
+.btn1:hover {
   box-shadow: 0 0 2.5px 1px black;
-  transition: .1s;
+  transition: 0.1s;
   transform: scale(1.015);
 }
-.btn1:focus{
+.btn1:focus {
   outline: none;
 }
-.btn1:active{
+.btn1:active {
   box-shadow: 0 0 1px 1px black;
-  transition: .01s;
-  transform: scale(.99)
+  transition: 0.01s;
+  transform: scale(0.99);
 }
 </style>
