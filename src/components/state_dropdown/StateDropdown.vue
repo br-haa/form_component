@@ -302,7 +302,7 @@ export default {
           input,
           false
         );
-        this.passed = false
+        this.passed = false;
       }
     },
   },

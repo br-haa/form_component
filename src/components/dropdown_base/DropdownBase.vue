@@ -57,9 +57,9 @@ export default {
       type: String,
       default: "Pick An Option",
     },
-    passed:{
+    passed: {
       type: Boolean,
-    }
+    },
   },
   methods: {
     SetPlaceholder() {

@@ -50,7 +50,7 @@ export default {
     NotRequired: {
       type: Boolean,
     },
-    passed:{
+    passed: {
       type: Boolean,
     },
   },

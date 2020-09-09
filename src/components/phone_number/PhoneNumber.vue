@@ -15,10 +15,10 @@ import BaseField from "../base_field/BaseField.vue";
 export default {
   components: { BaseField },
   name: "PhoneNumber",
-  data(){
-    return{
+  data() {
+    return {
       passed: false,
-    }
+    };
   },
   props: {
     NotRequired: {

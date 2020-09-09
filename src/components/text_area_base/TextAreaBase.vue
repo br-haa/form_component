@@ -52,7 +52,7 @@ export default {
     SpanSize: {
       type: Number,
     },
-    passed:{
+    passed: {
       type: Boolean,
     },
   },

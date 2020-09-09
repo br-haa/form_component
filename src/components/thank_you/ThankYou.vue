@@ -14,7 +14,7 @@
               <!--&lt;!&ndash;                <img src="~assets/img/logo.png" alt="logo">&ndash;&gt;-->
               <!--              </div>-->
               <div class="thankyou-main-text">
-               <h1>Thank You</h1>
+                <h1>Thank You</h1>
                 <div class="thankyou-back-row">
                   <button id="back-button" v-on:click="close()">Go back</button>
                   <p>We will be back in touch with you as soon as possible.</p>
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="thankyou-right">
-             <h2>For more information visit</h2>
+              <h2>For more information visit</h2>
               <div class="thankyou-client-link">
                 <div class="client-line"></div>
                 <!--edit the client link in the script tag below-->
@@ -98,7 +98,7 @@ $small-size: 640px;
   }
 }
 .thankyou-left {
-align-self: start;
+  align-self: start;
   @media (max-width: 1050px) {
     grid-area: 1/1/1/1;
   }
@@ -110,7 +110,7 @@ align-self: start;
 }
 
 .thankyou-right {
-align-self: center;
+  align-self: center;
   @media (max-width: 1050px) {
     grid-area: 1/1/1/1;
   }
