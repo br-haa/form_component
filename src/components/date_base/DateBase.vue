@@ -4,8 +4,8 @@
     :for="BaseId"
     :class="{ 'date-fieldFocus': focused || userInput !== '' }"
   >
-    <span class="date-fieldText">{{ SetPlaceholder() }}</span>
     <input
+      :class="{ passed: passed }"
       @change="SendUp"
       @focus="focused = true"
       @blur="
@@ -50,6 +50,9 @@ export default {
     NotRequired: {
       type: Boolean,
     },
+    passed:{
+      type: Boolean,
+    },
   },
   methods: {
     SetPlaceholder: function () {
@@ -71,6 +74,9 @@ export default {
 
 <style scoped lang="scss">
 $small-size: 640px;
+.passed {
+  border-bottom: #3eaf7c solid 2px;
+}
 .date-fields {
   display: grid;
   .date-fieldText {
@@ -83,7 +89,6 @@ $small-size: 640px;
     transition: 0.3s;
     pointer-events: none;
     user-select: none;
-    background: white;
   }
   input {
     grid-area: 1 / 1 / 2 / 2;

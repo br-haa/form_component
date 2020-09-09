@@ -6,6 +6,7 @@
     :base-name="`date`"
     :base-type="`date`"
     :not-required="NotRequired"
+    :passed="passed"
   ></DateBase>
 </template>
 
@@ -19,6 +20,7 @@ export default {
     return {
       Value: "",
       test: "",
+      passed: false,
     };
   },
   props: {
@@ -47,8 +49,10 @@ export default {
     validateInput: function (input) {
       if (input !== undefined && input !== "") {
         this.$emit("validating", "Date", "Date", input, true);
+        this.passed = true;
       } else {
         this.$emit("validating", "Date", "Date", input, false);
+        this.passed = false;
       }
     },
   },
