@@ -71,7 +71,7 @@ $small-size: 640px;
   background: linear-gradient(45deg, #201e5f, #006967);
   height: 100vh;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   font-family: "Source Sans Pro", sans-serif;
