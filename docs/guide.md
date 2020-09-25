@@ -8,7 +8,7 @@
 `npm install webpack-cli webpack copy-webpack-plugin --save-dev`
 
 ## Web pack config (webpack.config.js)
-```
+```javascript
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
 `<link rel="stylesheet" type="text/css" href="dist/form.css">`
 
 ## Main form file
-```
+```php
 <script src="dist/vue.min.js"></script>
 <script src="dist/form.js"></script>
 
@@ -94,7 +94,7 @@ if($dynamic_num){  // replace with project phone var
 
 # Vue set up
 ## plugin
-```
+```javascript
 import Vue from 'vue'
 import HaaFormComponents from "haa-form";
 import 'haa-form/dist/haa-form.css'
@@ -103,7 +103,7 @@ Vue.use(HaaFormComponents)
 
 ```
 ## Main form file
-```
+```vue
 <template>
   <div>
     <Nuxt />
