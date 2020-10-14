@@ -8,6 +8,7 @@
     :Bjn="PropBjn"
     :form-type="PropFormType"
     :added-fields="PropAddFields"
+    :added-dropdowns="AddDropdowns"
     :button-text="PropButtonText"
     :client-link="PropClientLink"
     :post-values="PostValues"
@@ -52,7 +53,11 @@ export default {
       type: String,
     },
     AddFields: {
+      //Todo this can't be right?
       type: Object,
+    },
+    AddDropdowns: {
+      type: Array,
     },
     ButtonText: {
       type: String,

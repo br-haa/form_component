@@ -54,6 +54,20 @@
                       :not-required="field.NotRequired"
                     ></text-field>
                   </div>
+                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
+                    <dropdown-field
+                      class="BasicField"
+                      @validating="trackValidation"
+                      v-for="dropdown in AddedDropdowns"
+                      :key="dropdown.id"
+                      :base-text="dropdown.placeholder"
+                      :Options="dropdown.options"
+                      :base-id="dropdown.id"
+                      :base-name="dropdown.name"
+                      :not-required="dropdown.NotRequired"
+                    >
+                    </dropdown-field>
+                  </div>
                 </div>
 
                 <div class="form2" v-if="FormType === 2">
@@ -108,6 +122,20 @@
                       :text-name="field.name"
                       :not-required="field.NotRequired"
                     ></text-field>
+                  </div>
+                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
+                    <dropdown-field
+                      class="BasicField"
+                      @validating="trackValidation"
+                      v-for="dropdown in AddedDropdowns"
+                      :key="dropdown.id"
+                      :base-text="dropdown.placeholder"
+                      :Options="dropdown.options"
+                      :base-id="dropdown.id"
+                      :base-name="dropdown.name"
+                      :not-required="dropdown.NotRequired"
+                    >
+                    </dropdown-field>
                   </div>
                 </div>
 
@@ -175,6 +203,20 @@
                       :not-required="field.NotRequired"
                     ></text-field>
                   </div>
+                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
+                    <dropdown-field
+                      class="BasicField"
+                      @validating="trackValidation"
+                      v-for="dropdown in AddedDropdowns"
+                      :key="dropdown.id"
+                      :base-text="dropdown.placeholder"
+                      :Options="dropdown.options"
+                      :base-id="dropdown.id"
+                      :base-name="dropdown.name"
+                      :not-required="dropdown.NotRequired"
+                    >
+                    </dropdown-field>
+                  </div>
                 </div>
                 <text-area
                   @validating="trackValidation"
@@ -217,9 +259,11 @@ import ThankYou from "../thank_you/ThankYou.vue";
 import StateDropdown from "../state_dropdown/StateDropdown.vue";
 import Zip from "../zip_field/Zip.vue";
 import DateInput from "../date_input/DateInput.vue";
+import DropdownField from "../dropdown_field/DropdownField";
 
 export default {
   components: {
+    DropdownField,
     DateInput,
     Zip,
     StateDropdown,
@@ -242,6 +286,9 @@ export default {
   }),
   props: {
     AddedFields: {
+      type: Array,
+    },
+    AddedDropdowns: {
       type: Array,
     },
     ButtonText: {
