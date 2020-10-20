@@ -28,6 +28,7 @@
     :state2-placeholder="PropState2Placeholder"
     :message-placeholder="PropMessagePlaceholder"
     :consent-text="PropConsentText"
+    :hsla="hsla"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -130,6 +131,17 @@ export default {
     },
     ConsentText: {
       type: String,
+    },
+    hsla: {
+      type: Object,
+      default() {
+        return {
+          hue: 200,
+          saturation: 100,
+          lightness: 50,
+          alpha: 1,
+        };
+      },
     },
   },
   data() {
