@@ -29,6 +29,7 @@
     :message-placeholder="PropMessagePlaceholder"
     :consent-text="PropConsentText"
     :hsla="hsla"
+    :accent-skew="accentSkew"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -143,6 +144,10 @@ export default {
         };
       },
     },
+    accentSkew: {
+      type: Number,
+      default: 1.85
+    }
   },
   data() {
     return {

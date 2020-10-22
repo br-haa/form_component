@@ -234,7 +234,7 @@
               <div class="buttonGrid">
                 <div class="line"></div>
                 <div>
-                  <button id="SubmitButton" @click="FormPostStart" class="btn1" :style="{ background: `hsl(${hsla.hue * 1.85},${hsla.saturation}%,50%)`}">
+                  <button id="SubmitButton" @click="FormPostStart" class="btn1" :style="{ background: `hsl(${hsla.hue * accentSkew},${hsla.saturation}%,50%)`}">
                     {{ ButtonText }}
                   </button>
                   <!--      <button @click="formTest()">TEST</button>-->
@@ -381,6 +381,9 @@ export default {
     hsla: {
       type: Object,
     },
+    accentSkew:{
+      type: Number
+    }
   },
   methods: {
     trackValidation(name, id, value, status) {
