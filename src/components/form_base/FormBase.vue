@@ -20,97 +20,74 @@
                 <h2>{{ CtaText }}</h2>
               </div>
               <form id="contact-form">
-                <div
-                  :class="{ inline: inline === true, form1: inline === false }"
-                  v-if="FormType === 1"
-                >
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="FirstNamePlaceholder"
-                    :text-id="'FirstName'"
-                  ></text-field>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="LastNamePlaceholder"
-                    :text-id="'LastName'"
-                  ></text-field>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
-                </div>
-
-                <div class="form2" v-if="FormType === 2">
-                  <div class="name-grid">
+                <component v-bind:is="getFormType" :inline="inline">
+                  <template v-slot:FirstName>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="FirstNamePlaceholder"
+                      :text-text="Placeholders.FirstName"
                       :text-id="'FirstName'"
                     ></text-field>
+                  </template>
+                  <template v-slot:LastName>
                     <text-field
                       @validating="trackValidation"
-                      :text-text="LastNamePlaceholder"
+                      :text-text="Placeholders.LastName"
                       :text-id="'LastName'"
                     ></text-field>
-                  </div>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="AddressPlaceholder"
-                    :text-id="'Address'"
-                  ></text-field>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="CityPlaceholder"
-                    :text-id="'City'"
-                  ></text-field>
-                  <div class="state-zip-grid">
+                  </template>
+                  <template v-slot:Email>
+                    <email
+                      @validating="trackValidation"
+                      :email-text="Placeholders.Email"
+                    ></email>
+                  </template>
+                  <template v-slot:Phone>
+                    <phone-number
+                      @validating="trackValidation"
+                      :phone-text="Placeholders.Phone"
+                    ></phone-number>
+                  </template>
+                  <template v-slot:Address>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.Address"
+                      :text-id="'Address'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:City>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.City"
+                      :text-id="'City'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:States>
                     <StateDropdown
                       @validating="trackValidation"
-                      :state-text="StatePlaceholder"
+                      :state-text="Placeholders.State"
                     ></StateDropdown>
+                  </template>
+                  <template v-slot:Zip>
                     <Zip
                       @validating="trackValidation"
-                      :zip-text="ZipPlaceholder"
+                      :zip-text="Placeholders.Zip"
                     ></Zip>
-                  </div>
+                  </template>
+                  <template v-slot:Date>
+                    <DateInput
+                      class="long-span"
+                      :date-text="Placeholders.Date"
+                      @validating="trackValidation"
+                    ></DateInput>
+                  </template>
+                  <template v-slot:StatesTwo>
+                    <StateDropdown
+                      class="long-span"
+                      @validating="trackValidation"
+                      :duplicate="2"
+                      :state-text="Placeholders.StateTwo"
+                    ></StateDropdown>
+                  </template>
                   <div class="addedFieldsGrid" v-if="AddedFields">
                     <text-field
                       class="BasicField"
@@ -137,87 +114,7 @@
                     >
                     </dropdown-field>
                   </div>
-                </div>
-
-                <div class="form3" v-if="FormType === 3">
-                  <div class="name-grid">
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="FirstNamePlaceholder"
-                      :text-id="'FirstName'"
-                    ></text-field>
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="LastNamePlaceholder"
-                      :text-id="'LastName'"
-                    ></text-field>
-                  </div>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="AddressPlaceholder"
-                    :text-id="'Address'"
-                  ></text-field>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="CityPlaceholder"
-                    :text-id="'City'"
-                  ></text-field>
-                  <div class="state-zip-grid">
-                    <StateDropdown
-                      @validating="trackValidation"
-                      :state-text="StatePlaceholder"
-                    ></StateDropdown>
-                    <Zip
-                      @validating="trackValidation"
-                      :zip-text="ZipPlaceholder"
-                    ></Zip>
-                  </div>
-                  <DateInput
-                    class="long-span"
-                    :date-text="DatePlaceholder"
-                    @validating="trackValidation"
-                  ></DateInput>
-                  <StateDropdown
-                    class="long-span"
-                    @validating="trackValidation"
-                    :duplicate="2"
-                    :state-text="State2Placeholder"
-                  ></StateDropdown>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
-                </div>
+                </component>
                 <text-area
                   @validating="trackValidation"
                   :text-text="MessagePlaceholder"
@@ -234,10 +131,18 @@
               <div class="buttonGrid">
                 <div class="line"></div>
                 <div>
-                  <button id="SubmitButton" @click="FormPostStart" class="btn1" :style="{ background: `hsl(${hsla.hue * 1.85},${hsla.saturation}%,50%)`}">
+                  <button
+                    id="SubmitButton"
+                    @click="FormPostStart"
+                    class="btn1"
+                    :style="{
+                      background: `hsl(${hsla.hue * 1.85},${
+                        hsla.saturation
+                      }%,50%)`,
+                    }"
+                  >
                     {{ ButtonText }}
                   </button>
-                  <!--      <button @click="formTest()">TEST</button>-->
                 </div>
                 <div class="line"></div>
               </div>
@@ -253,14 +158,16 @@ import TextField from "../text_field/TextField.vue";
 import Email from "../email/Email.vue";
 import PhoneNumber from "../phone_number/PhoneNumber.vue";
 import ErrorMessage from "../error_message/ErrorMessage.vue";
-import TextArea from "../text_area/TextArea.vue";
-import CheckBoxHolder from "../check_box_holder/CheckBoxHolder.vue";
+import TextArea from "../text_area/text_area/TextArea.vue";
+import CheckBoxHolder from "../check_box/check_box_holder/CheckBoxHolder.vue";
 import ThankYou from "../thank_you/ThankYou.vue";
-import StateDropdown from "../state_dropdown/StateDropdown.vue";
+import StateDropdown from "../dropdown/state_dropdown/StateDropdown.vue";
 import Zip from "../zip_field/Zip.vue";
-import DateInput from "../date_input/DateInput.vue";
-import DropdownField from "../dropdown_field/DropdownField";
-
+import DateInput from "../date/date_input/DateInput.vue";
+import DropdownField from "../dropdown/dropdown_field/DropdownField";
+import FormOne from "../form_types/form_one/FormOne";
+import FormTwo from "../form_types/form_two/FormTwo";
+import FormThree from "../form_types/form_three/FormThree";
 export default {
   components: {
     DropdownField,
@@ -274,6 +181,9 @@ export default {
     PhoneNumber,
     Email,
     TextField,
+    FormOne,
+    FormTwo,
+    FormThree,
   },
 
   name: "FormBase",
@@ -283,6 +193,18 @@ export default {
     thankYouActive: false, // triggers the thank-you page
     CtmObject: {}, // the final object that gets posted to CTM
     AllData: [], // the combination of the validated objects and Post data
+    Placeholders: {
+      FirstName: "First Name",
+      LastName: "Last Name",
+      Email: "Email",
+      Phone: "Phone",
+      Address: "Address",
+      City: "City",
+      State: "State",
+      Zip: "Zip",
+      Date: "Date",
+      StateTwo: "State",
+    },
   }),
   props: {
     AddedFields: {
@@ -331,55 +253,20 @@ export default {
     FormTest: {
       type: Boolean,
     },
-    FirstNamePlaceholder: {
-      type: String,
-      default: "First Name",
-    },
-    LastNamePlaceholder: {
-      type: String,
-      default: "Last Name",
-    },
-    EmailPlaceholder: {
-      type: String,
-      default: "Email",
-    },
-    PhonePlaceholder: {
-      type: String,
-      default: "Phone",
-    },
-    AddressPlaceholder: {
-      type: String,
-      default: "Address",
-    },
-    CityPlaceholder: {
-      type: String,
-      default: "City",
-    },
-    StatePlaceholder: {
-      type: String,
-      default: "Pick Your State",
-    },
-    ZipPlaceholder: {
-      type: String,
-      default: "Zip",
-    },
-    DatePlaceholder: {
-      type: String,
-      default: "Date",
-    },
-    State2Placeholder: {
-      type: String,
-      default: "Where did the accident happen?",
-    },
-    MessagePlaceholder: {
-      type: String,
-      default: "Message",
-    },
     ConsentText: {
       type: String,
     },
     hsla: {
       type: Object,
+    },
+  },
+  computed: {
+    getFormType() {
+      if (this.formType === 1) {
+        return "FormOne";
+      } else {
+        return "FormOne";
+      }
     },
   },
   methods: {
@@ -422,166 +309,151 @@ export default {
         this.CreateObject();
       }
     },
-
-    CreateObject() {
-      // creating the form post object for ctm
-      this.CtmObject = {
-        country_code: "1", // the expected country code e.g. +1, +44, +55, +61, etc... the plus is excluded
-        name: this.search(`FirstName`) + " " + this.search(`LastName`),
-        phone: this.search(`Phone`),
-        email: this.search(`Email`),
-        custom: {},
-      };
-      if (!this.PostValues) {
-        this.setTimeStamp(); // updates time stamp
+    getUrlParams() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const entries = urlParams.entries();
+      console.log(entries);
+      let arr = [];
+      for (const entry of entries) {
+        arr.push(`${entry[0]}: ${entry[1]}`);
       }
-      if (this.PostValues) {
-        this.AllData = this.validationObjects.concat(this.PostValues);
-      } else {
-        const StoreValues = this.$store.state.Values.PostValues;
-        this.AllData = [...this.validationObjects, ...StoreValues];
-      }
-      if (this.PostValues) {
-        this.setTimeStamp(); // updates time stamp
-      }
-      console.log("Posting this data"); // console logging the visible form data
-      this.AllData.forEach((x) => {
-        console.log(x.id + " " + x.value);
-      });
-      this.AllData.forEach((vo) => {
-        // adding all the post values and custom values to the custom object
-        if (vo.id !== "Phone" && vo.id !== "Email") {
-          // basically just not repeating phone and email
-          this.CtmObject.custom[vo.id] = vo.value;
-        }
-      });
-      if (!this.FormTest) {
-        this.PostType1();
-        if (this.ZapPost) {
-          this.sendZapPost();
-        }
-      } else {
-        this.ThankYouPageActivate();
-        console.log(
-          "%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!",
-          "color: black; background: red"
-        );
-      }
+      console.log(arr);
+      return arr;
     },
-
-    HandleErrorMessage() {
-      // error message handling. who could have guessed
-      this.validationObjects.forEach((x) => {
-        if (!x.status) {
-          this.errorText.push(`Please check ${x.name} is filled correctly`);
-        }
-      });
-    },
-    setTimeStamp() {
-      if (this.PostValues) {
-        this.pushValues(
-          { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
-          this.AllData
-        );
-      } else {
-        this.$store.commit("Values/SortV", {
-          id: "TimeStamp",
-          value: new Date().getTime(), // TimeStamp set with Vuex
-        });
+  },
+  CreateObject() {
+    // creating the form post object for ctm
+    this.CtmObject = {
+      country_code: "1", // the expected country code e.g. +1, +44, +55, +61, etc... the plus is excluded
+      name: this.search(`FirstName`) + " " + this.search(`LastName`),
+      phone: this.search(`Phone`),
+      email: this.search(`Email`),
+      custom: {},
+    };
+    if (this.PostValues) {
+      this.AllData = this.validationObjects.concat(this.PostValues);
+    }
+    this.AllData = this.AllData.concat(this.getUrlParams());
+    this.setTimeStamp(); // updates time stamp
+    console.log("Posting this data"); // console logging the visible form data
+    this.AllData.forEach((x) => {
+      console.log(x.id + " " + x.value);
+    });
+    this.AllData.forEach((vo) => {
+      // adding all the post values and custom values to the custom object
+      if (vo.id !== "Phone" && vo.id !== "Email") {
+        // basically just not repeating phone and email
+        this.CtmObject.custom[vo.id] = vo.value;
       }
-    },
+    });
+    if (!this.FormTest) {
+      this.PostType1();
+      if (this.ZapPost) {
+        this.sendZapPost();
+      }
+    } else {
+      this.ThankYouPageActivate();
+      console.log(
+        "%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!",
+        "color: black; background: red"
+      );
+    }
+  },
 
-    PostType1() {
-      // sending off the data
-      // eslint-disable-next-line no-undef
-      __ctm.form.track(
+  HandleErrorMessage() {
+    // error message handling. who could have guessed
+    this.validationObjects.forEach((x) => {
+      if (!x.status) {
+        this.errorText.push(`Please check ${x.name} is filled correctly`);
+      }
+    });
+  },
+  setTimeStamp() {
+    this.pushValues(
+      { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
+      this.AllData
+    );
+  },
+
+  PostType1() {
+    // sending off the data
+    // eslint-disable-next-line no-undef
+    __ctm.form
+      .track(
         "app.calltrackingmetrics.com",
         this.FormReactor,
         this.Bjn,
         this.CtmObject
-      );
-      this.ThankYouPageActivate();
-    },
-    sendZapPost: function () {
-      let custom = {};
-      this.AllData.forEach((vo) => {
-        // adding all the post values and custom values to the custom object
-        custom[vo.id] = vo.value;
+      )
+      .then(function (response) {
+        this.ThankYouPageActivate(response);
+      })
+      .catch((error) => {
+        console.error(error.message);
       });
-      console.log(custom);
-      let xhr = new XMLHttpRequest(),
-        method = "POST",
-        url = this.ZapPost; // live
-      xhr.open(method, url, true);
-      // Set content type header information for sending url encoded variables in the request
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.send(JSON.stringify(custom));
-    },
+  },
+  sendZapPost: function () {
+    let custom = {};
+    this.AllData.forEach((vo) => {
+      // adding all the post values and custom values to the custom object
+      custom[vo.id] = vo.value;
+    });
+    console.log(custom);
+    let xhr = new XMLHttpRequest(),
+      method = "POST",
+      url = this.ZapPost; // live
+    xhr.open(method, url, true);
+    // Set content type header information for sending url encoded variables in the request
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(JSON.stringify(custom));
+  },
 
-    search: function (id) {
-      // grabbing object value by id name
-      for (let i = 0; i < this.validationObjects.length; i++) {
-        const oob = this.validationObjects[i];
-        if (oob.id === id) {
-          return oob.value;
-        }
+  search: function (id) {
+    // grabbing object value by id name
+    for (let i = 0; i < this.validationObjects.length; i++) {
+      const oob = this.validationObjects[i];
+      if (oob.id === id) {
+        return oob.value;
       }
-    },
-    ThankYouPageActivate() {
-      // activating thankyou modal
-      this.thankYouActive = true;
-    },
-    pushValues(value, destination) {
-      // pushing variables into designated arrays
-      let obj = { id: value.id, value: value.value };
-      let check = [];
-      destination.forEach((item) => {
-        if (item.id === value.id) {
-          item.value = value.value;
-          check.push(true);
-        } else {
-          check.push(false);
-        }
-      });
-      if (
-        check.some((x) => {
-          return x === true;
-        })
-      ) {
-        check = [];
+    }
+  },
+  ThankYouPageActivate() {
+    // activating thankyou modal
+    this.thankYouActive = true;
+  },
+  pushValues(value, destination) {
+    // pushing variables into designated arrays
+    let obj = { id: value.id, value: value.value };
+    let check = [];
+    destination.forEach((item) => {
+      if (item.id === value.id) {
+        item.value = value.value;
+        check.push(true);
       } else {
-        destination.push(obj);
-        check = [];
+        check.push(false);
       }
-    },
+    });
+    if (
+      check.some((x) => {
+        return x === true;
+      })
+    ) {
+      check = [];
+    } else {
+      destination.push(obj);
+      check = [];
+    }
   },
 };
 </script>
 
 <style scoped lang="scss">
 $accent-color: orange !default;
-#form-outside{
+#form-outside {
   scroll-margin-top: 20vh;
 }
-.form1 {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .addedFieldsGrid {
-    grid-column: span 2;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
+
 .inline {
   display: grid;
   grid-gap: 1.5rem;
@@ -600,50 +472,7 @@ $accent-color: orange !default;
     }
   }
 }
-.form2 {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .addedFieldsGrid {
-    grid-column: span 3;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
-.form3 {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .long-span {
-    grid-column: span 3;
-    @media (max-width: 1080px) {
-      grid-column: span 1;
-    }
-  }
-  .addedFieldsGrid {
-    grid-column: span 3;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
+
 .name-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
