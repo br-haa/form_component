@@ -5,6 +5,8 @@
       v-if="thankYouActive"
       :activated="thankYouActive"
       :client-link="ClientLink"
+      :form-test="FormTest"
+      :response="formResponse"
     ></thank-you>
     <transition name="fade">
       <div v-if="!HideForm" v-bind:class="{ 'form-is-modal': IsModal }">
@@ -117,7 +119,7 @@
                 </component>
                 <text-area
                   @validating="trackValidation"
-                  :text-text="MessagePlaceholder"
+                  :text-text="Placeholders.Message"
                   :text-id="'Message'"
                   :not-required="true"
                   :form-type="FormType"
@@ -204,7 +206,9 @@ export default {
       Zip: "Zip",
       Date: "Date",
       StateTwo: "State",
+      Message: "Message",
     },
+    formResponse: "",
   }),
   props: {
     AddedFields: {
@@ -264,6 +268,10 @@ export default {
     getFormType() {
       if (this.formType === 1) {
         return "FormOne";
+      } else if (this.formType === 2) {
+        return "FormTwo";
+      } else if (this.formType === 3) {
+        return "FormThree";
       } else {
         return "FormOne";
       }
@@ -321,129 +329,130 @@ export default {
       console.log(arr);
       return arr;
     },
-  },
-  CreateObject() {
-    // creating the form post object for ctm
-    this.CtmObject = {
-      country_code: "1", // the expected country code e.g. +1, +44, +55, +61, etc... the plus is excluded
-      name: this.search(`FirstName`) + " " + this.search(`LastName`),
-      phone: this.search(`Phone`),
-      email: this.search(`Email`),
-      custom: {},
-    };
-    if (this.PostValues) {
-      this.AllData = this.validationObjects.concat(this.PostValues);
-    }
-    this.AllData = this.AllData.concat(this.getUrlParams());
-    this.setTimeStamp(); // updates time stamp
-    console.log("Posting this data"); // console logging the visible form data
-    this.AllData.forEach((x) => {
-      console.log(x.id + " " + x.value);
-    });
-    this.AllData.forEach((vo) => {
-      // adding all the post values and custom values to the custom object
-      if (vo.id !== "Phone" && vo.id !== "Email") {
-        // basically just not repeating phone and email
-        this.CtmObject.custom[vo.id] = vo.value;
+    CreateObject() {
+      // creating the form post object for ctm
+      this.CtmObject = {
+        country_code: "1", // the expected country code e.g. +1, +44, +55, +61, etc... the plus is excluded
+        name: this.search(`FirstName`) + " " + this.search(`LastName`),
+        phone: this.search(`Phone`),
+        email: this.search(`Email`),
+        custom: {},
+      };
+      if (this.PostValues) {
+        this.AllData = this.validationObjects.concat(this.PostValues);
       }
-    });
-    if (!this.FormTest) {
-      this.PostType1();
-      if (this.ZapPost) {
-        this.sendZapPost();
+      this.AllData = this.AllData.concat(this.getUrlParams());
+      this.setTimeStamp(); // updates time stamp
+      console.log("Posting this data"); // console logging the visible form data
+      this.AllData.forEach((x) => {
+        console.log(x.id + " " + x.value);
+      });
+      this.AllData.forEach((vo) => {
+        // adding all the post values and custom values to the custom object
+        if (vo.id !== "Phone" && vo.id !== "Email") {
+          // basically just not repeating phone and email
+          this.CtmObject.custom[vo.id] = vo.value;
+        }
+      });
+      if (!this.FormTest) {
+        this.PostType1();
+        if (this.ZapPost) {
+          this.sendZapPost();
+        }
+      } else {
+        this.ThankYouPageActivate();
+        console.log(
+          "%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!",
+          "color: black; background: red"
+        );
       }
-    } else {
-      this.ThankYouPageActivate();
-      console.log(
-        "%c FORM TEST ACTIVE!!!!!!!!!!!!!!!!!",
-        "color: black; background: red"
+    },
+
+    HandleErrorMessage() {
+      // error message handling. who could have guessed
+      this.validationObjects.forEach((x) => {
+        if (!x.status) {
+          this.errorText.push(`Please check ${x.name} is filled correctly`);
+        }
+      });
+    },
+    setTimeStamp() {
+      this.pushValues(
+        { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
+        this.AllData
       );
-    }
-  },
-
-  HandleErrorMessage() {
-    // error message handling. who could have guessed
-    this.validationObjects.forEach((x) => {
-      if (!x.status) {
-        this.errorText.push(`Please check ${x.name} is filled correctly`);
-      }
-    });
-  },
-  setTimeStamp() {
-    this.pushValues(
-      { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
-      this.AllData
-    );
-  },
-
-  PostType1() {
-    // sending off the data
-    // eslint-disable-next-line no-undef
-    __ctm.form
-      .track(
+    },
+    PostType1() {
+      // sending off the data
+      // eslint-disable-next-line no-undef
+      __ctm.form.track(
         "app.calltrackingmetrics.com",
         this.FormReactor,
         this.Bjn,
         this.CtmObject
-      )
-      .then(function (response) {
-        this.ThankYouPageActivate(response);
-      })
-      .catch((error) => {
-        console.error(error.message);
+      );
+      fetch("__ctm.form")
+        .then((response) => {
+          console.log(response.statusText);
+          this.formResponse = response.statusText;
+          this.ThankYouPageActivate();
+        })
+        .catch((error) => {
+          console.log("ERROR:", error);
+        });
+    },
+    sendZapPost: function () {
+      let custom = {};
+      this.AllData.forEach((vo) => {
+        // adding all the post values and custom values to the custom object
+        custom[vo.id] = vo.value;
       });
-  },
-  sendZapPost: function () {
-    let custom = {};
-    this.AllData.forEach((vo) => {
-      // adding all the post values and custom values to the custom object
-      custom[vo.id] = vo.value;
-    });
-    console.log(custom);
-    let xhr = new XMLHttpRequest(),
-      method = "POST",
-      url = this.ZapPost; // live
-    xhr.open(method, url, true);
-    // Set content type header information for sending url encoded variables in the request
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(JSON.stringify(custom));
-  },
+      console.log(custom);
+      let xhr = new XMLHttpRequest(),
+        method = "POST",
+        url = this.ZapPost; // live
+      xhr.open(method, url, true);
+      // Set content type header information for sending url encoded variables in the request
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(JSON.stringify(custom));
+    },
 
-  search: function (id) {
-    // grabbing object value by id name
-    for (let i = 0; i < this.validationObjects.length; i++) {
-      const oob = this.validationObjects[i];
-      if (oob.id === id) {
-        return oob.value;
+    search: function (id) {
+      // grabbing object value by id name
+      for (let i = 0; i < this.validationObjects.length; i++) {
+        const oob = this.validationObjects[i];
+        if (oob.id === id) {
+          return oob.value;
+        }
       }
-    }
-  },
-  ThankYouPageActivate() {
-    // activating thankyou modal
-    this.thankYouActive = true;
-  },
-  pushValues(value, destination) {
-    // pushing variables into designated arrays
-    let obj = { id: value.id, value: value.value };
-    let check = [];
-    destination.forEach((item) => {
-      if (item.id === value.id) {
-        item.value = value.value;
-        check.push(true);
+    },
+    ThankYouPageActivate() {
+      // activating thankyou modal
+      this.thankYouActive = true;
+    },
+    pushValues(value, destination) {
+      // pushing variables into designated arrays
+      let obj = { id: value.id, value: value.value };
+      let check = [];
+      destination.forEach((item) => {
+        if (item.id === value.id) {
+          item.value = value.value;
+          check.push(true);
+        } else {
+          check.push(false);
+        }
+      });
+      if (
+        check.some((x) => {
+          return x === true;
+        })
+      ) {
+        check = [];
       } else {
-        check.push(false);
+        destination.push(obj);
+        check = [];
       }
-    });
-    if (
-      check.some((x) => {
-        return x === true;
-      })
-    ) {
-      check = [];
-    } else {
-      destination.push(obj);
-      check = [];
-    }
+    },
   },
 };
 </script>
@@ -473,23 +482,6 @@ $accent-color: orange !default;
   }
 }
 
-.name-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.state-zip-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-}
 #contact-form {
 }
 .buttonGrid {
