@@ -90,33 +90,33 @@
                       :state-text="Placeholders.StateTwo"
                     ></StateDropdown>
                   </template>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
                 </component>
+                <div
+                  class="addedFieldsGrid"
+                  v-if="AddedFields || AddedDropdowns"
+                >
+                  <text-field
+                    class="BasicField"
+                    @validating="trackValidation"
+                    v-for="field in AddedFields"
+                    :text-text="field.placeholder"
+                    :key="field.id"
+                    :text-id="field.id"
+                    :text-name="field.name"
+                    :not-required="field.NotRequired"
+                  ></text-field>
+                  <dropdown-field
+                    class="BasicField"
+                    @validating="trackValidation"
+                    v-for="dropdown in AddedDropdowns"
+                    :key="dropdown.id"
+                    :base-text="dropdown.placeholder"
+                    :Options="dropdown.options"
+                    :base-id="dropdown.id"
+                    :base-name="dropdown.name"
+                    :not-required="dropdown.NotRequired"
+                  ></dropdown-field>
+                </div>
                 <text-area
                   @validating="trackValidation"
                   :text-text="Placeholders.Message"
@@ -138,7 +138,7 @@
                     @click="FormPostStart"
                     class="btn1"
                     :style="{
-                      background: `hsl(${hsla.hue * 1.85},${
+                      background: `hsl(${hsla.hue * HueShift},${
                         hsla.saturation
                       }%,50%)`,
                     }"
@@ -263,6 +263,12 @@ export default {
     hsla: {
       type: Object,
     },
+    HueShift: {
+      type: Number,
+    },
+    CustomPlaceholders: {
+      type: Object,
+    },
   },
   computed: {
     getFormType() {
@@ -321,10 +327,13 @@ export default {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const entries = urlParams.entries();
-      console.log(entries);
       let arr = [];
       for (const entry of entries) {
-        arr.push(`${entry[0]}: ${entry[1]}`);
+        let obj = {};
+        obj[entry[0]] = entry[1];
+        obj.id = entry[0];
+        obj.value = entry[1];
+        arr.push(obj);
       }
       console.log(arr);
       return arr;
@@ -378,7 +387,7 @@ export default {
     },
     setTimeStamp() {
       this.pushValues(
-        { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
+        { id: "TimeStamp", value: new Date().getTime() },
         this.AllData
       );
     },
@@ -391,15 +400,7 @@ export default {
         this.Bjn,
         this.CtmObject
       );
-      fetch("__ctm.form")
-        .then((response) => {
-          console.log(response.statusText);
-          this.formResponse = response.statusText;
-          this.ThankYouPageActivate();
-        })
-        .catch((error) => {
-          console.log("ERROR:", error);
-        });
+      this.ThankYouPageActivate();
     },
     sendZapPost: function () {
       let custom = {};
@@ -453,6 +454,23 @@ export default {
         check = [];
       }
     },
+    setPlaceholders() {
+      // needs to compare the custom place holder object with the placeholder object and replace the ones with matching names
+      if (this.CustomPlaceholders) {
+        for (const name in this.CustomPlaceholders) {
+          if (
+            Object.keys(this.Placeholders).some((k) => {
+              return ~k.indexOf(name);
+            })
+          ) {
+            this.Placeholders[name] = this.CustomPlaceholders[name];
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.setPlaceholders();
   },
 };
 </script>
@@ -481,7 +499,16 @@ $accent-color: orange !default;
     }
   }
 }
-
+.addedFieldsGrid {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.5rem;
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr;
+    grid-column: span 1;
+  }
+}
 #contact-form {
 }
 .buttonGrid {

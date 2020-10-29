@@ -18,6 +18,8 @@
     :form-test="FormTest"
     :consent-text="ConsentText"
     :hsla="hsla"
+    :hue-shift="HueShift"
+    :custom-placeholders="CustomPlaceholders"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
 </template>
@@ -44,7 +46,7 @@ export default {
     },
     AddFields: {
       //Todo this can't be right?
-      type: Object,
+      type: Array,
     },
     AddDropdowns: {
       type: Array,
@@ -98,6 +100,12 @@ export default {
           alpha: 1,
         };
       },
+    },
+    HueShift: {
+      type: Number,
+    },
+    CustomPlaceholders: {
+      type: Object,
     },
   },
   data() {
