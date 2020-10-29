@@ -138,7 +138,7 @@
                     @click="FormPostStart"
                     class="btn1"
                     :style="{
-                      background: `hsl(${hsla.hue * HueShift},${
+                      background: `hsl(${hsla.hue * AccentSkew},${
                         hsla.saturation
                       }%,50%)`,
                     }"
@@ -263,7 +263,7 @@ export default {
     hsla: {
       type: Object,
     },
-    HueShift: {
+    AccentSkew: {
       type: Number,
     },
     CustomPlaceholders: {

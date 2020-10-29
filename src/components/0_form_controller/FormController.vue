@@ -18,7 +18,7 @@
     :form-test="FormTest"
     :consent-text="ConsentText"
     :hsla="hsla"
-    :hue-shift="HueShift"
+    :accent-skew="AccentSkew"
     :custom-placeholders="CustomPlaceholders"
     v-on:modal-control="ModalSwitch()"
   ></form-base>
@@ -101,7 +101,7 @@ export default {
         };
       },
     },
-    HueShift: {
+    AccentSkew: {
       type: Number,
     },
     CustomPlaceholders: {
