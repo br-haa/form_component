@@ -5,6 +5,8 @@
       v-if="thankYouActive"
       :activated="thankYouActive"
       :client-link="ClientLink"
+      :form-test="FormTest"
+      :response="formResponse"
     ></thank-you>
     <transition name="fade">
       <div v-if="!HideForm" v-bind:class="{ 'form-is-modal': IsModal }">
@@ -20,207 +22,104 @@
                 <h2>{{ CtaText }}</h2>
               </div>
               <form id="contact-form">
+                <component v-bind:is="getFormType" :inline="inline">
+                  <template v-slot:FirstName>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.FirstName"
+                      :text-id="'FirstName'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:LastName>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.LastName"
+                      :text-id="'LastName'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:Email>
+                    <email
+                      @validating="trackValidation"
+                      :email-text="Placeholders.Email"
+                    ></email>
+                  </template>
+                  <template v-slot:Phone>
+                    <phone-number
+                      @validating="trackValidation"
+                      :phone-text="Placeholders.Phone"
+                    ></phone-number>
+                  </template>
+                  <template v-slot:Address>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.Address"
+                      :text-id="'Address'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:City>
+                    <text-field
+                      @validating="trackValidation"
+                      :text-text="Placeholders.City"
+                      :text-id="'City'"
+                    ></text-field>
+                  </template>
+                  <template v-slot:States>
+                    <StateDropdown
+                      @validating="trackValidation"
+                      :state-text="Placeholders.State"
+                    ></StateDropdown>
+                  </template>
+                  <template v-slot:Zip>
+                    <Zip
+                      @validating="trackValidation"
+                      :zip-text="Placeholders.Zip"
+                    ></Zip>
+                  </template>
+                  <template v-slot:Date>
+                    <DateInput
+                      class="long-span"
+                      :date-text="Placeholders.Date"
+                      @validating="trackValidation"
+                    ></DateInput>
+                  </template>
+                  <template v-slot:StatesTwo>
+                    <StateDropdown
+                      class="long-span"
+                      @validating="trackValidation"
+                      :duplicate="2"
+                      :state-text="Placeholders.StateTwo"
+                    ></StateDropdown>
+                  </template>
+                </component>
                 <div
-                  :class="{ inline: inline === true, form1: inline === false }"
-                  v-if="FormType === 1"
+                  class="addedFieldsGrid"
+                  v-if="AddedFields || AddedDropdowns"
                 >
                   <text-field
+                    class="BasicField"
                     @validating="trackValidation"
-                    :text-text="FirstNamePlaceholder"
-                    :text-id="'FirstName'"
+                    v-for="field in AddedFields"
+                    :text-text="field.placeholder"
+                    :key="field.id"
+                    :text-id="field.id"
+                    :text-name="field.name"
+                    :not-required="field.NotRequired"
                   ></text-field>
-                  <text-field
+                  <dropdown-field
+                    class="BasicField"
                     @validating="trackValidation"
-                    :text-text="LastNamePlaceholder"
-                    :text-id="'LastName'"
-                  ></text-field>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
-                </div>
-
-                <div class="form2" v-if="FormType === 2">
-                  <div class="name-grid">
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="FirstNamePlaceholder"
-                      :text-id="'FirstName'"
-                    ></text-field>
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="LastNamePlaceholder"
-                      :text-id="'LastName'"
-                    ></text-field>
-                  </div>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="AddressPlaceholder"
-                    :text-id="'Address'"
-                  ></text-field>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="CityPlaceholder"
-                    :text-id="'City'"
-                  ></text-field>
-                  <div class="state-zip-grid">
-                    <StateDropdown
-                      @validating="trackValidation"
-                      :state-text="StatePlaceholder"
-                    ></StateDropdown>
-                    <Zip
-                      @validating="trackValidation"
-                      :zip-text="ZipPlaceholder"
-                    ></Zip>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
-                </div>
-
-                <div class="form3" v-if="FormType === 3">
-                  <div class="name-grid">
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="FirstNamePlaceholder"
-                      :text-id="'FirstName'"
-                    ></text-field>
-                    <text-field
-                      @validating="trackValidation"
-                      :text-text="LastNamePlaceholder"
-                      :text-id="'LastName'"
-                    ></text-field>
-                  </div>
-                  <email
-                    @validating="trackValidation"
-                    :email-text="EmailPlaceholder"
-                  ></email>
-                  <phone-number
-                    @validating="trackValidation"
-                    :phone-text="PhonePlaceholder"
-                  ></phone-number>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="AddressPlaceholder"
-                    :text-id="'Address'"
-                  ></text-field>
-                  <text-field
-                    @validating="trackValidation"
-                    :text-text="CityPlaceholder"
-                    :text-id="'City'"
-                  ></text-field>
-                  <div class="state-zip-grid">
-                    <StateDropdown
-                      @validating="trackValidation"
-                      :state-text="StatePlaceholder"
-                    ></StateDropdown>
-                    <Zip
-                      @validating="trackValidation"
-                      :zip-text="ZipPlaceholder"
-                    ></Zip>
-                  </div>
-                  <DateInput
-                    class="long-span"
-                    :date-text="DatePlaceholder"
-                    @validating="trackValidation"
-                  ></DateInput>
-                  <StateDropdown
-                    class="long-span"
-                    @validating="trackValidation"
-                    :duplicate="2"
-                    :state-text="State2Placeholder"
-                  ></StateDropdown>
-                  <div class="addedFieldsGrid" v-if="AddedFields">
-                    <text-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="field in AddedFields"
-                      :text-text="field.placeholder"
-                      :key="field.id"
-                      :text-id="field.id"
-                      :text-name="field.name"
-                      :not-required="field.NotRequired"
-                    ></text-field>
-                  </div>
-                  <div class="addedFieldsGrid" v-if="AddedDropdowns">
-                    <dropdown-field
-                      class="BasicField"
-                      @validating="trackValidation"
-                      v-for="dropdown in AddedDropdowns"
-                      :key="dropdown.id"
-                      :base-text="dropdown.placeholder"
-                      :Options="dropdown.options"
-                      :base-id="dropdown.id"
-                      :base-name="dropdown.name"
-                      :not-required="dropdown.NotRequired"
-                    >
-                    </dropdown-field>
-                  </div>
+                    v-for="dropdown in AddedDropdowns"
+                    :key="dropdown.id"
+                    :base-text="dropdown.placeholder"
+                    :Options="dropdown.options"
+                    :base-id="dropdown.id"
+                    :base-name="dropdown.name"
+                    :not-required="dropdown.NotRequired"
+                  ></dropdown-field>
                 </div>
                 <text-area
                   @validating="trackValidation"
-                  :text-text="MessagePlaceholder"
+                  :text-text="Placeholders.Message"
                   :text-id="'Message'"
                   :not-required="true"
                   :form-type="FormType"
@@ -234,10 +133,18 @@
               <div class="buttonGrid">
                 <div class="line"></div>
                 <div>
-                  <button id="SubmitButton" @click="FormPostStart" class="btn1" :style="{ background: `hsl(${hsla.hue * accentSkew},${hsla.saturation}%,50%)`}">
+                  <button
+                    id="SubmitButton"
+                    @click="FormPostStart"
+                    class="btn1"
+                    :style="{
+                      background: `hsl(${hsla.hue * accentSkew},${
+                        hsla.saturation
+                      }%,50%)`,
+                    }"
+                  >
                     {{ ButtonText }}
                   </button>
-                  <!--      <button @click="formTest()">TEST</button>-->
                 </div>
                 <div class="line"></div>
               </div>
@@ -253,14 +160,16 @@ import TextField from "../text_field/TextField.vue";
 import Email from "../email/Email.vue";
 import PhoneNumber from "../phone_number/PhoneNumber.vue";
 import ErrorMessage from "../error_message/ErrorMessage.vue";
-import TextArea from "../text_area/TextArea.vue";
-import CheckBoxHolder from "../check_box_holder/CheckBoxHolder.vue";
+import TextArea from "../text_area/text_area/TextArea.vue";
+import CheckBoxHolder from "../check_box/check_box_holder/CheckBoxHolder.vue";
 import ThankYou from "../thank_you/ThankYou.vue";
-import StateDropdown from "../state_dropdown/StateDropdown.vue";
+import StateDropdown from "../dropdown/state_dropdown/StateDropdown.vue";
 import Zip from "../zip_field/Zip.vue";
-import DateInput from "../date_input/DateInput.vue";
-import DropdownField from "../dropdown_field/DropdownField";
-
+import DateInput from "../date/date_input/DateInput.vue";
+import DropdownField from "../dropdown/dropdown_field/DropdownField";
+import FormOne from "../form_types/form_one/FormOne";
+import FormTwo from "../form_types/form_two/FormTwo";
+import FormThree from "../form_types/form_three/FormThree";
 export default {
   components: {
     DropdownField,
@@ -274,6 +183,9 @@ export default {
     PhoneNumber,
     Email,
     TextField,
+    FormOne,
+    FormTwo,
+    FormThree,
   },
 
   name: "FormBase",
@@ -283,6 +195,20 @@ export default {
     thankYouActive: false, // triggers the thank-you page
     CtmObject: {}, // the final object that gets posted to CTM
     AllData: [], // the combination of the validated objects and Post data
+    Placeholders: {
+      FirstName: "First Name",
+      LastName: "Last Name",
+      Email: "Email",
+      Phone: "Phone",
+      Address: "Address",
+      City: "City",
+      State: "State",
+      Zip: "Zip",
+      Date: "Date",
+      StateTwo: "State",
+      Message: "Message",
+    },
+    formResponse: "",
   }),
   props: {
     AddedFields: {
@@ -331,59 +257,31 @@ export default {
     FormTest: {
       type: Boolean,
     },
-    FirstNamePlaceholder: {
-      type: String,
-      default: "First Name",
-    },
-    LastNamePlaceholder: {
-      type: String,
-      default: "Last Name",
-    },
-    EmailPlaceholder: {
-      type: String,
-      default: "Email",
-    },
-    PhonePlaceholder: {
-      type: String,
-      default: "Phone",
-    },
-    AddressPlaceholder: {
-      type: String,
-      default: "Address",
-    },
-    CityPlaceholder: {
-      type: String,
-      default: "City",
-    },
-    StatePlaceholder: {
-      type: String,
-      default: "Pick Your State",
-    },
-    ZipPlaceholder: {
-      type: String,
-      default: "Zip",
-    },
-    DatePlaceholder: {
-      type: String,
-      default: "Date",
-    },
-    State2Placeholder: {
-      type: String,
-      default: "Where did the accident happen?",
-    },
-    MessagePlaceholder: {
-      type: String,
-      default: "Message",
-    },
     ConsentText: {
       type: String,
     },
     hsla: {
       type: Object,
     },
-    accentSkew:{
-      type: Number
-    }
+    accentSkew: {
+      type: Number,
+    },
+    CustomPlaceholders: {
+      type: Object,
+    },
+  },
+  computed: {
+    getFormType() {
+      if (this.formType === 1) {
+        return "FormOne";
+      } else if (this.formType === 2) {
+        return "FormTwo";
+      } else if (this.formType === 3) {
+        return "FormThree";
+      } else {
+        return "FormOne";
+      }
+    },
   },
   methods: {
     trackValidation(name, id, value, status) {
@@ -425,7 +323,21 @@ export default {
         this.CreateObject();
       }
     },
-
+    getUrlParams() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const entries = urlParams.entries();
+      let arr = [];
+      for (const entry of entries) {
+        let obj = {};
+        obj[entry[0]] = entry[1];
+        obj.id = entry[0];
+        obj.value = entry[1];
+        arr.push(obj);
+      }
+      console.log(arr);
+      return arr;
+    },
     CreateObject() {
       // creating the form post object for ctm
       this.CtmObject = {
@@ -435,18 +347,11 @@ export default {
         email: this.search(`Email`),
         custom: {},
       };
-      if (!this.PostValues) {
-        this.setTimeStamp(); // updates time stamp
-      }
       if (this.PostValues) {
         this.AllData = this.validationObjects.concat(this.PostValues);
-      } else {
-        const StoreValues = this.$store.state.Values.PostValues;
-        this.AllData = [...this.validationObjects, ...StoreValues];
       }
-      if (this.PostValues) {
-        this.setTimeStamp(); // updates time stamp
-      }
+      this.AllData = this.AllData.concat(this.getUrlParams());
+      this.setTimeStamp(); // updates time stamp
       console.log("Posting this data"); // console logging the visible form data
       this.AllData.forEach((x) => {
         console.log(x.id + " " + x.value);
@@ -481,19 +386,11 @@ export default {
       });
     },
     setTimeStamp() {
-      if (this.PostValues) {
-        this.pushValues(
-          { id: "TimeStamp", value: new Date().getTime() }, // TimeStamp set without Vuex
-          this.AllData
-        );
-      } else {
-        this.$store.commit("Values/SortV", {
-          id: "TimeStamp",
-          value: new Date().getTime(), // TimeStamp set with Vuex
-        });
-      }
+      this.pushValues(
+        { id: "TimeStamp", value: new Date().getTime() },
+        this.AllData
+      );
     },
-
     PostType1() {
       // sending off the data
       // eslint-disable-next-line no-undef
@@ -557,34 +454,33 @@ export default {
         check = [];
       }
     },
+    setPlaceholders() {
+      // needs to compare the custom place holder object with the placeholder object and replace the ones with matching names
+      if (this.CustomPlaceholders) {
+        for (const name in this.CustomPlaceholders) {
+          if (
+            Object.keys(this.Placeholders).some((k) => {
+              return ~k.indexOf(name);
+            })
+          ) {
+            this.Placeholders[name] = this.CustomPlaceholders[name];
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.setPlaceholders();
   },
 };
 </script>
 
 <style scoped lang="scss">
 $accent-color: orange !default;
-#form-outside{
+#form-outside {
   scroll-margin-top: 20vh;
 }
-.form1 {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .addedFieldsGrid {
-    grid-column: span 2;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
+
 .inline {
   display: grid;
   grid-gap: 1.5rem;
@@ -603,65 +499,14 @@ $accent-color: orange !default;
     }
   }
 }
-.form2 {
+.addedFieldsGrid {
   display: grid;
   grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   margin-bottom: 1.5rem;
   @media (max-width: 1080px) {
     grid-template-columns: 1fr;
-  }
-  .addedFieldsGrid {
-    grid-column: span 3;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
-.form3 {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .long-span {
-    grid-column: span 3;
-    @media (max-width: 1080px) {
-      grid-column: span 1;
-    }
-  }
-  .addedFieldsGrid {
-    grid-column: span 3;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
-.name-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.state-zip-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
+    grid-column: span 1;
   }
 }
 #contact-form {
