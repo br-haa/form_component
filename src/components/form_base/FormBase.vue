@@ -481,24 +481,6 @@ $accent-color: orange !default;
   scroll-margin-top: 20vh;
 }
 
-.inline {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr;
-  margin-bottom: 1.5rem;
-  @media (max-width: 1080px) {
-    grid-template-columns: 1fr;
-  }
-  .addedFieldsGrid {
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
-}
 .addedFieldsGrid {
   display: grid;
   grid-gap: 1.5rem;

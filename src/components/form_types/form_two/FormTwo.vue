@@ -1,5 +1,5 @@
 <template>
-  <div class="form2">
+  <div :class="{ inline: inline, form2: !inline }">
     <div class="name-grid">
       <slot name="FirstName"></slot>
       <slot name="LastName"></slot>
@@ -18,6 +18,11 @@
 <script>
 export default {
   name: "FormTwo",
+  props: {
+    inline: {
+      type: Boolean,
+    },
+  },
 };
 </script>
 
@@ -30,16 +35,6 @@ export default {
   @media (max-width: 1080px) {
     grid-template-columns: 1fr;
   }
-  .addedFieldsGrid {
-    grid-column: span 3;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
-  }
   .name-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -48,11 +43,19 @@ export default {
       grid-template-columns: 1fr;
     }
   }
-
   .state-zip-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1.5rem;
+    @media (max-width: 1080px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  .inline {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 1.5rem;
     @media (max-width: 1080px) {
       grid-template-columns: 1fr;
     }

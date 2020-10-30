@@ -1,5 +1,5 @@
 <template>
-  <div class="form1">
+  <div :class="{ inline: inline, form1: !inline }">
     <slot name="FirstName"></slot>
     <slot name="LastName"></slot>
     <slot name="Email"></slot>
@@ -10,6 +10,11 @@
 <script>
 export default {
   name: "Form1",
+  props: {
+    inline: {
+      type: Boolean,
+    },
+  },
 };
 </script>
 
@@ -22,15 +27,14 @@ export default {
   @media (max-width: 1080px) {
     grid-template-columns: 1fr;
   }
-  .addedFieldsGrid {
-    grid-column: span 2;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: 1fr 1fr;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr;
-      grid-column: span 1;
-    }
+}
+.inline {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.5rem;
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr;
   }
 }
 </style>
