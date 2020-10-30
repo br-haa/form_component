@@ -32,31 +32,11 @@ module.exports = {
 `<link rel="stylesheet" type="text/css" href="dist/form.css">`
 
 ## Main form file
-```php
+```html
 <script src="dist/vue.min.js"></script>
 <script src="dist/form.js"></script>
 
 <?php
-if(isset($_GET['geo'])) {
-    $formGeo = $_GET['geo'];
-} else {
-    $formGeo = "N/A";
-}
-if(isset($_GET['camp'])) {
-    $formCamp = $_GET['camp'];
-} else {
-    $formCamp = "N/A";
-}
-if(isset($_GET['gclid'])) {
-    $clid = $_GET['gclid'];
-} else {
-    $clid = "N/A";
-}
-if(isset($_GET['adgroup'])) {
-    $adg = $_GET['adgroup'];
-} else {
-    $adg = "N/A";
-}
 if($dynamic_num){  // replace with project phone var
     $formNumb = $dynamic_num;
 } else {
@@ -79,10 +59,6 @@ if($dynamic_num){  // replace with project phone var
         el: '#FormHolder',
         data: {
             PostValues: [
-                {id: 'Geo', value: "'<?php echo $formGeo; ?>'"},
-                {id: 'Camp', value: "'<?php echo $formCamp; ?>'"},
-                {id: 'Gclid', value: "'<?php echo $clid; ?>'"},
-                {id: 'ADG', value: "'<?php echo $adg; ?>'"},
                 {id: 'HaaNumber', value: "'<?php echo $formNumb; ?>'"},
                 {id: 'URL', value: window.location.href}
             ]
