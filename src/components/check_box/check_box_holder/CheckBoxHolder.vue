@@ -1,6 +1,10 @@
 <template>
   <div class="check-box-holder">
-    <check-box @input="validateInput"></check-box>
+    <check-box
+      @input="validateInput"
+      :hsla="hsla"
+      :accentSkew="accentSkew"
+    ></check-box>
     <div>
       <p class="consent-text">
         {{ ConsentText }}
@@ -19,6 +23,12 @@ export default {
       type: String,
       default:
         "I understand and agree that submitting this form does not create an attorney client relationship and the information I submit is not confidential or privileged",
+    },
+    hsla: {
+      type: Object,
+    },
+    accentSkew: {
+      type: Number,
     },
   },
 

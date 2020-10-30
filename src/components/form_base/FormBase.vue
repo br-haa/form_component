@@ -128,6 +128,8 @@
                   @validating="trackValidation"
                   v-if="consent"
                   :consent-text="ConsentText"
+                  :hsla="hsla"
+                  :accentSkew="accentSkew"
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">

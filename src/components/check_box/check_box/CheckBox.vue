@@ -9,7 +9,12 @@
       required
     />
     <label id="myCheck" for="consent">
-      <span id="check"></span>
+      <span
+        id="check"
+        :style="{
+          background: `hsl(${hsla.hue * accentSkew},${hsla.saturation}%,50%)`,
+        }"
+      ></span>
     </label>
   </div>
 </template>
@@ -22,6 +27,14 @@ export default {
       CheckStatus: false,
     };
   },
+  props: {
+    hsla: {
+      type: Object,
+    },
+    accentSkew: {
+      type: Number,
+    },
+  },
   methods: {
     SendUp: function () {
       this.$emit("input", this.CheckStatus);
@@ -31,7 +44,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$accent-color: orange !default;
 #consent {
   display: none;
 }
@@ -46,7 +58,6 @@ $accent-color: orange !default;
   box-sizing: border-box;
   #check {
     display: block;
-    background: $accent-color;
     height: 100%;
     width: 100%;
     -webkit-clip-path: polygon(
