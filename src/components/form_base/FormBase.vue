@@ -20,8 +20,9 @@
             <div id="form-inside" v-if="!HideForm">
               <div class="cta-text">
                 <h2>{{ CtaText }}</h2>
+                <slot></slot>
               </div>
-              <form id="contact-form">
+              <form id="contact-form" :class="{darkBackground: DarkBackground}" :style="{color: getTextColor}">
                 <component v-bind:is="getFormType" :inline="inline">
                   <template v-slot:FirstName>
                     <text-field
@@ -130,6 +131,7 @@
                   :consent-text="ConsentText"
                   :hsla="hsla"
                   :accentSkew="accentSkew"
+                  :dark-background="DarkBackground"
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">
@@ -140,9 +142,7 @@
                     @click="FormPostStart"
                     class="btn1"
                     :style="{
-                      background: `hsl(${hsla.hue * accentSkew},${
-                        hsla.saturation
-                      }%,50%)`,
+                      background: `hsl(${hsla.h * accentSkew},${hsla.s}%,50%)`,
                     }"
                   >
                     {{ ButtonText }}
@@ -271,6 +271,12 @@ export default {
     CustomPlaceholders: {
       type: Object,
     },
+    DarkBackground: {
+      type: Boolean
+    },
+    theme:{
+      type: Object
+    }
   },
   computed: {
     getFormType() {
@@ -282,6 +288,13 @@ export default {
         return "FormThree";
       } else {
         return "FormOne";
+      }
+    },
+    getTextColor(){
+      if(this.theme){
+        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`
+      } else {
+        return `inherit`;
       }
     },
   },
@@ -479,6 +492,11 @@ export default {
 
 <style scoped lang="scss">
 $accent-color: orange !default;
+.darkBackground {
+  .fieldFocus {
+    color: white !important;
+  }
+}
 #form-outside {
   scroll-margin-top: 20vh;
 }

@@ -12,7 +12,7 @@
       <span
         id="check"
         :style="{
-          background: `hsl(${hsla.hue * accentSkew},${hsla.saturation}%,50%)`,
+          background: `hsl(${hsla.h * accentSkew},${hsla.s}%,50%)`,
         }"
       ></span>
     </label>

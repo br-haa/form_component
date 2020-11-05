@@ -20,8 +20,12 @@
     :hsla="hsla"
     :accent-skew="accentSkew"
     :custom-placeholders="CustomPlaceholders"
+    :dark-background="DarkBackground"
+    :theme="theme"
     v-on:modal-control="ModalSwitch()"
-  ></form-base>
+  >
+    <slot></slot>
+  </form-base>
 </template>
 
 <script>
@@ -90,14 +94,20 @@ export default {
     ConsentText: {
       type: String,
     },
+    DarkBackground: {
+      type: Boolean,
+    },
+    theme: {
+      type: Object,
+    },
     hsla: {
       type: Object,
       default() {
         return {
-          hue: 200,
-          saturation: 100,
-          lightness: 50,
-          alpha: 1,
+          h: 200,
+          s: 100,
+          l: 50,
+          a: 1,
         };
       },
     },
