@@ -20,7 +20,7 @@
     :hsla="theme.hsla"
     :accent-skew="theme.accentSkew"
     :custom-placeholders="CustomPlaceholders"
-    :dark-background="true"
+    :dark-background="theme.isDark"
     :theme="theme"
     v-on:modal-control="ModalSwitch()"
   >
