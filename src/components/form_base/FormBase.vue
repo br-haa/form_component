@@ -20,7 +20,9 @@
             <div id="form-inside" v-if="!HideForm">
               <div class="cta-text">
                 <h2>{{ CtaText }}</h2>
-                <slot></slot>
+                <div class="formSlotHolder">
+                  <slot></slot>
+                </div>
               </div>
               <form id="contact-form" :class="{darkBackground: DarkBackground}" :style="{color: getTextColor}">
                 <component v-bind:is="getFormType" :inline="inline">
@@ -135,20 +137,20 @@
                 ></check-box-holder>
               </form>
               <div class="buttonGrid">
-                <div class="line"></div>
+                <div class="line" :style="{ background: getLineColor }"></div>
                 <div>
                   <button
                     id="SubmitButton"
                     @click="FormPostStart"
                     class="btn1"
                     :style="{
-                      background: `hsl(${hsla.h * accentSkew},${hsla.s}%,50%)`,
+                      background: `hsl(${hsla.h},${hsla.s}%,50%)`,
                     }"
                   >
                     {{ ButtonText }}
                   </button>
                 </div>
-                <div class="line"></div>
+                <div class="line" :style="{ background: getLineColor }"></div>
               </div>
             </div>
           </transition>
@@ -272,9 +274,9 @@ export default {
       type: Object,
     },
     DarkBackground: {
-      type: Boolean
+      type: Boolean,
     },
-    theme:{
+    theme: {
       type: Object
     }
   },
@@ -294,9 +296,18 @@ export default {
       if(this.theme){
         return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`
       } else {
-        return `inherit`;
+        return `black`;
       }
     },
+    getLineColor(){
+      if(this.DarkBackground){
+        return 'white'
+      } else if (this.theme){
+        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`
+      } else {
+        return 'black'
+      }
+    }
   },
   methods: {
     trackValidation(name, id, value, status) {
@@ -492,6 +503,9 @@ export default {
 
 <style scoped lang="scss">
 $accent-color: orange !default;
+.formSlotHolder{
+  margin-bottom: 1rem;
+}
 .darkBackground {
   .fieldFocus {
     color: white !important;

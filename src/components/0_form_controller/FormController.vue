@@ -17,10 +17,10 @@
     :zap-post="ZapPost"
     :form-test="FormTest"
     :consent-text="ConsentText"
-    :hsla="hsla"
-    :accent-skew="accentSkew"
+    :hsla="theme.hsla"
+    :accent-skew="theme.accentSkew"
     :custom-placeholders="CustomPlaceholders"
-    :dark-background="DarkBackground"
+    :dark-background="true"
     :theme="theme"
     v-on:modal-control="ModalSwitch()"
   >
