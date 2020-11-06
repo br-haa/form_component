@@ -6,7 +6,7 @@
       :accentSkew="accentSkew"
     ></check-box>
     <div>
-      <p class="consent-text" :style="{color: getTextColor}">
+      <p class="consent-text" :style="{ color: getTextColor }">
         {{ ConsentText }}
       </p>
     </div>
@@ -30,18 +30,18 @@ export default {
     accentSkew: {
       type: Number,
     },
-    DarkBackground:{
-      type: Boolean
-    }
+    DarkBackground: {
+      type: Boolean,
+    },
   },
-  computed:{
-    getTextColor(){
-      if(this.DarkBackground){
-        return 'white'
-      }else{
-        return 'inherit'
+  computed: {
+    getTextColor() {
+      if (this.DarkBackground) {
+        return "white";
+      } else {
+        return "inherit";
       }
-    }
+    },
   },
   methods: {
     validateInput(CheckStatus) {

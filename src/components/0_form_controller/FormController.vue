@@ -99,6 +99,15 @@ export default {
     },
     theme: {
       type: Object,
+      default() {
+        return {
+          hsla: { h: 220, s: 100, l: 30, a: 1 },
+          textColor: { h: 220, s: 30, l: 25, a: 1 },
+          accentSkew: 1.83,
+          background: 100,
+          isDark: false,
+        };
+      },
     },
     hsla: {
       type: Object,

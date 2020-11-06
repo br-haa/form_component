@@ -24,7 +24,11 @@
                   <slot></slot>
                 </div>
               </div>
-              <form id="contact-form" :class="{darkBackground: DarkBackground}" :style="{color: getTextColor}">
+              <form
+                id="contact-form"
+                :class="{ darkBackground: DarkBackground }"
+                :style="{ color: getTextColor }"
+              >
                 <component v-bind:is="getFormType" :inline="inline">
                   <template v-slot:FirstName>
                     <text-field
@@ -277,8 +281,8 @@ export default {
       type: Boolean,
     },
     theme: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   computed: {
     getFormType() {
@@ -292,22 +296,24 @@ export default {
         return "FormOne";
       }
     },
-    getTextColor(){
-      if(this.theme){
-        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`
+    getTextColor() {
+      if (this.DarkBackground && this.theme) {
+        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.background}%,${this.theme.textColor.a})`;
+      } else if (this.theme) {
+        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`;
       } else {
         return `black`;
       }
     },
-    getLineColor(){
-      if(this.DarkBackground){
-        return 'white'
-      } else if (this.theme){
-        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`
+    getLineColor() {
+      if (this.DarkBackground) {
+        return "white";
+      } else if (this.theme) {
+        return `hsla(${this.theme.textColor.h},${this.theme.textColor.s}%,${this.theme.textColor.l}%,${this.theme.textColor.a})`;
       } else {
-        return 'black'
+        return "black";
       }
-    }
+    },
   },
   methods: {
     trackValidation(name, id, value, status) {
@@ -503,7 +509,7 @@ export default {
 
 <style scoped lang="scss">
 $accent-color: orange !default;
-.formSlotHolder{
+.formSlotHolder {
   margin-bottom: 1rem;
 }
 .darkBackground {
