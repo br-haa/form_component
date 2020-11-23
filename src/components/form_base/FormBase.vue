@@ -286,11 +286,11 @@ export default {
   },
   computed: {
     getFormType() {
-      if (this.formType === 1) {
+      if (this.FormType === 1) {
         return "FormOne";
-      } else if (this.formType === 2) {
+      } else if (this.FormType === 2) {
         return "FormTwo";
-      } else if (this.formType === 3) {
+      } else if (this.FormType === 3) {
         return "FormThree";
       } else {
         return "FormOne";

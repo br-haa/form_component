@@ -49,7 +49,6 @@ export default {
       type: String,
     },
     AddFields: {
-      //Todo this can't be right?
       type: Array,
     },
     AddDropdowns: {

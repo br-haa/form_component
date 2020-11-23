@@ -118,7 +118,7 @@ select {
   border: none;
   box-shadow: 0 0 1px 0.5px black;
   transition: 0.5s;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 0.8rem;
 }
 
 select:focus {

@@ -6,13 +6,6 @@
     </div>
     <slot name="Email"></slot>
     <slot name="Phone"></slot>
-    <slot name="Address"></slot>
-    <slot name="City"></slot>
-    <div class="state-zip-grid">
-      <slot name="States"></slot>
-      <slot name="Zip"></slot>
-    </div>
-    <slot name="Date"></slot>
     <slot name="StatesTwo"></slot>
   </div>
 </template>
