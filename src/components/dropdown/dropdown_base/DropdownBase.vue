@@ -19,7 +19,7 @@
     >
       <option
         v-for="option in Options"
-        :value="option.name"
+        :value="getAbbv(option.abbreviation) + ' ' + option.name"
         :key="option.name"
         >{{ option.name }}</option
       >
@@ -75,6 +75,11 @@ export default {
     SendUp() {
       this.$emit("input", this.userInput);
     },
+    getAbbv(x){
+      if(x){
+        return x
+      }
+    }
   },
 };
 </script>
