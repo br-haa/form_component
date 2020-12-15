@@ -135,7 +135,7 @@
                   @validating="trackValidation"
                   v-if="consent"
                   :consent-text="ConsentText"
-                  :hsla="hsla"
+                  :theme="theme"
                   :accentSkew="accentSkew"
                   :dark-background="DarkBackground"
                 ></check-box-holder>
@@ -148,7 +148,7 @@
                     @click="FormPostStart"
                     class="btn1"
                     :style="{
-                      background: `hsl(${hsla.h * accentSkew},${hsla.s}%,50%)`,
+                      background: `hsl(${theme.accent.h},${theme.accent.s}%,${theme.accent.l}%)`,
                     }"
                   >
                     {{ ButtonText }}

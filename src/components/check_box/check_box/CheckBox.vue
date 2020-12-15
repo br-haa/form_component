@@ -12,7 +12,7 @@
       <span
         id="check"
         :style="{
-          background: `hsl(${hsla.h * accentSkew},${hsla.s}%,50%)`,
+          background: `hsl(${theme.accent.h},${theme.accent.s}%,${theme.accent.l}%)`,
         }"
       ></span>
     </label>
@@ -28,7 +28,7 @@ export default {
     };
   },
   props: {
-    hsla: {
+    theme: {
       type: Object,
     },
     accentSkew: {

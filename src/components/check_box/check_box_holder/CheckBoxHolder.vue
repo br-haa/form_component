@@ -2,7 +2,7 @@
   <div class="check-box-holder">
     <check-box
       @input="validateInput"
-      :hsla="hsla"
+      :theme="theme"
       :accentSkew="accentSkew"
     ></check-box>
     <div>
@@ -24,7 +24,7 @@ export default {
       default:
         "I understand and agree that submitting this form does not create an attorney client relationship and the information I submit is not confidential or privileged",
     },
-    hsla: {
+    theme: {
       type: Object,
     },
     accentSkew: {
