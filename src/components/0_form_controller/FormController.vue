@@ -102,7 +102,7 @@ export default {
         return {
           hsla: { h: 220, s: 100, l: 30, a: 1 },
           textColor: { h: 220, s: 30, l: 25, a: 1 },
-          accentSkew: 1.83,
+          accent: { h: 220, s: 100, l: 30, a: 1 },
           background: 100,
           isDark: false,
         };
