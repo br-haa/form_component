@@ -140,11 +140,10 @@ export default {
 
   methods: {
     ModalSwitch: function () {
-      console.log('test')
       this.MainFormSwitch = !this.MainFormSwitch;
     },
     ModalLoad: function () {
-      if (this.PropIsModal) {
+      if (this.IsModal) {
         this.MainFormSwitch = true;
       } else {
         this.MainFormSwitch = this.loadForm;
