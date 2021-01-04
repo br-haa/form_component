@@ -145,7 +145,7 @@ export default {
     },
     ModalLoad: function () {
       if (this.PropIsModal) {
-        this.MainFormSwitch = false;
+        this.MainFormSwitch = true;
       } else {
         this.MainFormSwitch = this.loadForm;
       }
