@@ -129,7 +129,7 @@ export default {
   },
   data() {
     return {
-      MainFormSwitch: true,
+      MainFormSwitch: false,
     };
   },
   watch: {
