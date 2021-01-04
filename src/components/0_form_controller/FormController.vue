@@ -36,7 +36,7 @@ export default {
   props: {
     loadForm: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     FormType: {
       type: Number,
