@@ -1,6 +1,6 @@
 <template>
   <form-base
-    v-if="MainFormSwitch"
+    v-if="!MainFormSwitch"
     :cta-text="CtaText"
     :hide-form="HideForm"
     :is-modal="IsModal"
@@ -140,6 +140,7 @@ export default {
 
   methods: {
     ModalSwitch: function () {
+      console.log('test')
       this.MainFormSwitch = !this.MainFormSwitch;
     },
     ModalLoad: function () {

@@ -9,7 +9,7 @@
       :response="formResponse"
     ></thank-you>
     <transition name="fade">
-      <div v-if="!HideForm" v-bind:class="{ 'form-is-modal': IsModal }">
+      <div  v-bind:class="{ 'form-is-modal': IsModal }">
         <div id="form-outside">
           <div class="XHolder" v-if="IsModal">
             <button class="modal-close" v-on:click="$emit(`modal-control`)">
@@ -17,7 +17,7 @@
             </button>
           </div>
           <transition name="in-out" appear>
-            <div id="form-inside" v-if="!HideForm">
+            <div id="form-inside">
               <div class="cta-text">
                 <h2>{{ CtaText }}</h2>
                 <div class="formSlotHolder">
