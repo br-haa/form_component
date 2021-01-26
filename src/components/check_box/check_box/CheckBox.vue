@@ -24,7 +24,7 @@ export default {
   name: "CheckBox",
   data() {
     return {
-      CheckStatus: true,
+      CheckStatus: false,
     };
   },
   props: {
