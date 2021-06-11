@@ -9,7 +9,7 @@
       :response="formResponse"
     ></thank-you>
     <transition name="fade">
-      <div  v-bind:class="{ 'form-is-modal': IsModal }">
+      <div v-bind:class="{ 'form-is-modal': IsModal }">
         <div id="form-outside">
           <div class="XHolder" v-if="IsModal">
             <button class="modal-close" v-on:click="$emit(`modal-control`)">
@@ -364,6 +364,7 @@ export default {
         let obj = {};
         obj[entry[0]] = entry[1];
         obj.id = entry[0];
+        obj.label = entry[0];
         obj.value = entry[1];
         arr.push(obj);
       }
@@ -388,6 +389,7 @@ export default {
       this.AllData.forEach((x) => {
         console.log(x.id + " " + x.value);
       });
+      console.log(this.AllData);
       this.AllData.forEach((vo) => {
         // adding all the post values and custom values to the custom object
         if (vo.id !== "Phone" && vo.id !== "Email") {
