@@ -25,9 +25,11 @@
               <div class="thankyou-client-link">
                 <div class="client-line"></div>
                 <!--edit the client link in the script tag below-->
-                <a v-bind:href="ClientLink" class="thankyou-link">{{
-                  ClientLink
-                }}</a>
+                <a
+                  v-bind:href="`${ClientLink}?utm_source=lp-thank-you`"
+                  class="thankyou-link"
+                  >{{ ClientLink }}</a
+                >
                 <div class="client-line"></div>
               </div>
             </div>
